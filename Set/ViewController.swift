@@ -12,6 +12,7 @@ class ViewController: UIViewController {
 
     @IBOutlet var cardButtons: [UIButton]!
     @IBOutlet weak var dealMoreCardsButton: UIButton!
+    @IBOutlet weak var newGameButton: UIButton!
     @IBOutlet weak var scoreLabel: UILabel!
     
     override func viewDidLoad() {
@@ -20,6 +21,7 @@ class ViewController: UIViewController {
             setVisuals(of: button)
         }
         setVisuals(of: dealMoreCardsButton)
+        setVisuals(of: newGameButton)
     }
     
     func setVisuals(of button: UIButton) {
