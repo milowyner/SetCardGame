@@ -7,3 +7,10 @@
 //
 
 import Foundation
+
+struct Card: Equatable {
+    let shape: Int
+    let color: Int
+    let shading: Int
+    let number: Int
+}
