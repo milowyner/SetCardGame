@@ -12,6 +12,7 @@ class ViewController: UIViewController {
 
     // List of card buttons in UI
     @IBOutlet var cardButtons: [UIButton]!
+    @IBOutlet var cardButtonsInPlay: [UIButton]!
     
     @IBOutlet weak var dealMoreCardsButton: UIButton!
     @IBOutlet weak var newGameButton: UIButton!
@@ -19,6 +20,10 @@ class ViewController: UIViewController {
     
     // Set game
     var game = SetGame()
+    
+    // Properties for cards
+    let shapes = ["▲", "●", "■"]
+    let colors = [#colorLiteral(red: 0.9108959436, green: 0.3638531566, blue: 0.3811461329, alpha: 1), #colorLiteral(red: 0.3175439835, green: 0.702655077, blue: 0.4420889616, alpha: 1), #colorLiteral(red: 0.4002629519, green: 0.342028439, blue: 0.6032297611, alpha: 1)]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +34,8 @@ class ViewController: UIViewController {
         // Set visuals for other buttons in UI
         setVisuals(of: dealMoreCardsButton)
         setVisuals(of: newGameButton)
+        
+        updateUI()
     }
     
     // Sets visuals (corner radius and shadow) of a button.
@@ -69,6 +76,13 @@ class ViewController: UIViewController {
             let card = cardButtons[indexFromGameCards]
             card.layer.borderWidth = 4.0
             card.layer.borderColor = color
+        }
+        
+        for (index, cardButton) in cardButtonsInPlay.enumerated() {
+            let card = game.cardsInPlay[index]
+            cardButton.setTitle(shapes[card.shape], for: .normal)
+            cardButton.tintColor = colors[card.color]
+            cardButton.setTitle(String(repeating: cardButton.currentTitle!, count: card.number + 1), for: .normal)
         }
     }
 }

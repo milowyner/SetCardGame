@@ -327,6 +327,18 @@
                         <outletCollection property="cardButtons" destination="DH9-Pq-oOf" collectionClass="NSMutableArray" id="ttt-S2-sye"/>
                         <outletCollection property="cardButtons" destination="6Ns-EU-Vhs" collectionClass="NSMutableArray" id="gLK-fm-F53"/>
                         <outletCollection property="cardButtons" destination="EWe-0c-znS" collectionClass="NSMutableArray" id="aeq-bb-WJz"/>
+                        <outletCollection property="cardButtonsInPlay" destination="dqg-PK-0v1" collectionClass="NSMutableArray" id="o5O-SW-EHj"/>
+                        <outletCollection property="cardButtonsInPlay" destination="TKl-0W-POm" collectionClass="NSMutableArray" id="Ndb-HT-W5B"/>
+                        <outletCollection property="cardButtonsInPlay" destination="oMT-lF-Vvs" collectionClass="NSMutableArray" id="32J-hF-gM6"/>
+                        <outletCollection property="cardButtonsInPlay" destination="EHs-hU-0Qj" collectionClass="NSMutableArray" id="A4w-Mz-daE"/>
+                        <outletCollection property="cardButtonsInPlay" destination="FW8-vv-yGt" collectionClass="NSMutableArray" id="w8t-Be-XES"/>
+                        <outletCollection property="cardButtonsInPlay" destination="DhP-2C-kcI" collectionClass="NSMutableArray" id="WRi-eQ-2KE"/>
+                        <outletCollection property="cardButtonsInPlay" destination="E4u-Wq-XRe" collectionClass="NSMutableArray" id="0D4-sS-Hqz"/>
+                        <outletCollection property="cardButtonsInPlay" destination="RL1-Sb-IBu" collectionClass="NSMutableArray" id="VCh-ar-Pee"/>
+                        <outletCollection property="cardButtonsInPlay" destination="ysV-Yc-ACZ" collectionClass="NSMutableArray" id="I0c-NZ-Xfw"/>
+                        <outletCollection property="cardButtonsInPlay" destination="iCP-6B-i3H" collectionClass="NSMutableArray" id="1BV-7E-bbj"/>
+                        <outletCollection property="cardButtonsInPlay" destination="CMH-Yd-oWa" collectionClass="NSMutableArray" id="KGP-Tp-rJl"/>
+                        <outletCollection property="cardButtonsInPlay" destination="i7N-P4-7lt" collectionClass="NSMutableArray" id="cIM-eC-HUq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

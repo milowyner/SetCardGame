@@ -27,6 +27,7 @@ struct SetGame {
                             number: (index / (3 * 3 * 3)) % 3)
             cardsInDeck.append(card)
         }
+        cardsInDeck.shuffle()
         
         // Initialize cardsInPlay to be the first 12 cards of cardsInDeck
         cardsInPlay = Array(cardsInDeck[0..<12])
