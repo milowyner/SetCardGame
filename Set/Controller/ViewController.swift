@@ -50,7 +50,16 @@ class ViewController: UIViewController {
     }
     
     func updateUI() {
-        let color: CGColor = #colorLiteral(red: 0, green: 0.4392156863, blue: 0.9607843137, alpha: 1)
+        let color: CGColor
+        if let cardsAreASet = game.selectedCardsAreASet {
+            if cardsAreASet {
+                color = #colorLiteral(red: 0.1176470588, green: 0.7647058824, blue: 0.2156862745, alpha: 1)
+            } else {
+                color = #colorLiteral(red: 0.9607843137, green: 0.1921568627, blue: 0.1490196078, alpha: 1)
+            }
+        } else {
+            color = #colorLiteral(red: 0, green: 0.4392156863, blue: 0.9607843137, alpha: 1)
+        }
         
         for card in cardButtons {
             card.layer.borderWidth = 0.0

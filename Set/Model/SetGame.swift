@@ -16,6 +16,8 @@ struct SetGame {
     // List of selected cards
     private(set) var selectedCards = [Card]()
     
+    private(set) var selectedCardsAreASet: Bool?
+    
     init() {
         // Initialize cardsInDeck using a temporary array
         var temporaryArrayOfCards = [Card]()
@@ -45,7 +47,12 @@ struct SetGame {
             selectedCards.append(card)
         }
         
+        if selectedCards.count == 3 {
+            selectedCardsAreASet = true
+        } else {
+            selectedCardsAreASet = nil
+        }
+        
         print(selectedCards)
-
     }
 }
