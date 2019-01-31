@@ -47,8 +47,6 @@ class ViewController: UIViewController {
     }
 
     @IBAction func cardPressed(_ sender: UIButton) {
-        // Call some sort of choose card method in the SetGame struct
-        // game.chooseCard(sender)
         let indexOfChosenCard = cardButtons.firstIndex(of: sender)!
         let chosenCard = game.cardsInPlay[indexOfChosenCard]
         game.chooseCard(chosenCard)
@@ -56,18 +54,55 @@ class ViewController: UIViewController {
         updateUI()
     }
     
+    // Updates the UI to represent the card's properties and color the card borders when selected.
     func updateUI() {
-        let color: CGColor
-        if let cardsAreASet = game.selectedCardsAreASet {
-            if cardsAreASet {
-                color = #colorLiteral(red: 0.1176470588, green: 0.7647058824, blue: 0.2156862745, alpha: 1)
-            } else {
-                color = #colorLiteral(red: 0.9607843137, green: 0.1921568627, blue: 0.1490196078, alpha: 1)
+        
+        // Update cards based on the model's four properties (shape, color, shading, and number)
+        for (index, cardButton) in cardButtonsInPlay.enumerated() {
+            let card = game.cardsInPlay[index]
+            
+            // Assign color to the card
+            cardButton.tintColor = colors[card.color]
+            
+            // Set the shape and repeat it based on number property
+            let repeatedShapes = String(repeating: shapes[card.shape].string, count: card.number + 1)
+            
+            // Set the shading attributes
+            var shadingAttributes: [NSAttributedString.Key: Any]
+            switch card.shading {
+            case 0:
+                // Solid
+                shadingAttributes = [:]
+            case 1:
+                // "Striped" (actually just slightly opaque)
+                shadingAttributes = [
+                    NSAttributedString.Key.foregroundColor: colors[card.color].withAlphaComponent(0.4),
+                    NSAttributedString.Key.strokeColor: colors[card.color],
+                    NSAttributedString.Key.strokeWidth: -6.0
+                ]
+            case 2:
+                // Outlined
+                shadingAttributes = [NSAttributedString.Key.strokeWidth: 6.0]
+            default:
+                fatalError("There should only be 3 different shading options")
             }
-        } else {
-            color = #colorLiteral(red: 0, green: 0.4392156863, blue: 0.9607843137, alpha: 1)
+            
+            // Set the card button's title using the repeated shapes string and shading attributes
+            let newAttributedTitle = NSAttributedString(string: repeatedShapes, attributes: shadingAttributes)
+            cardButton.setAttributedTitle(newAttributedTitle, for: .normal)
         }
         
+        // Set the color of the selected card borders
+        let borderColor: CGColor
+        if let cardsAreASet = game.selectedCardsAreASet {
+            if cardsAreASet {
+                borderColor = #colorLiteral(red: 0.1176470588, green: 0.7647058824, blue: 0.2156862745, alpha: 1)
+            } else {
+                borderColor = #colorLiteral(red: 0.9607843137, green: 0.1921568627, blue: 0.1490196078, alpha: 1)
+            }
+        } else {
+            borderColor = #colorLiteral(red: 0, green: 0.4392156863, blue: 0.9607843137, alpha: 1)
+        }
         for card in cardButtons {
             card.layer.borderWidth = 0.0
         }
@@ -75,16 +110,7 @@ class ViewController: UIViewController {
             let indexFromGameCards = game.cardsInPlay.firstIndex(of: selectedCard)!
             let card = cardButtons[indexFromGameCards]
             card.layer.borderWidth = 4.0
-            card.layer.borderColor = color
-        }
-        
-        for (index, cardButton) in cardButtonsInPlay.enumerated() {
-            let card = game.cardsInPlay[index]
-            cardButton.setAttributedTitle(shapes[card.shape], for: .normal)
-            cardButton.tintColor = colors[card.color]
-            
-            let repeatedTitle = String(repeating: cardButton.currentAttributedTitle!.string, count: card.number + 1)
-            cardButton.setAttributedTitle(NSAttributedString(string: repeatedTitle), for: .normal)
+            card.layer.borderColor = borderColor
         }
     }
 }
