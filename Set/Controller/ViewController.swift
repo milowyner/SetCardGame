@@ -22,7 +22,7 @@ class ViewController: UIViewController {
     var game = SetGame()
     
     // Properties for cards
-    let shapes = ["▲", "●", "■"]
+    let shapes: [NSAttributedString] = [NSAttributedString(string: "▲"), NSAttributedString(string: "●"), NSAttributedString(string: "■")]
     let colors = [#colorLiteral(red: 0.9108959436, green: 0.3638531566, blue: 0.3811461329, alpha: 1), #colorLiteral(red: 0.3175439835, green: 0.702655077, blue: 0.4420889616, alpha: 1), #colorLiteral(red: 0.4002629519, green: 0.342028439, blue: 0.6032297611, alpha: 1)]
     
     override func viewDidLoad() {
@@ -80,9 +80,11 @@ class ViewController: UIViewController {
         
         for (index, cardButton) in cardButtonsInPlay.enumerated() {
             let card = game.cardsInPlay[index]
-            cardButton.setTitle(shapes[card.shape], for: .normal)
+            cardButton.setAttributedTitle(shapes[card.shape], for: .normal)
             cardButton.tintColor = colors[card.color]
-            cardButton.setTitle(String(repeating: cardButton.currentTitle!, count: card.number + 1), for: .normal)
+            
+            let repeatedTitle = String(repeating: cardButton.currentAttributedTitle!.string, count: card.number + 1)
+            cardButton.setAttributedTitle(NSAttributedString(string: repeatedTitle), for: .normal)
         }
     }
 }
