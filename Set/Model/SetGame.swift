@@ -46,17 +46,21 @@ struct SetGame {
             selectedCards.append(card)
         }
         
+        // Check to see if cards form a set
         if selectedCards.count == 3 {
+            // Create a swift set for each property
             let setOfShapes = Set([selectedCards[0].shape, selectedCards[1].shape, selectedCards[2].shape])
             let setOfColors = Set([selectedCards[0].color, selectedCards[1].color, selectedCards[2].color])
             let setOfShadings = Set([selectedCards[0].shading, selectedCards[1].shading, selectedCards[2].shading])
             let setOfNumbers = Set([selectedCards[0].number, selectedCards[1].number, selectedCards[2].number])
             
+            // Check to see if each property forms a set
             let shapesAreASet = setOfShapes.count == 1 || setOfShapes.count == 3
             let colorsAreASet = setOfColors.count == 1 || setOfColors.count == 3
             let shadingsAreASet = setOfShadings.count == 1 || setOfShadings.count == 3
             let numbersAreASet = setOfNumbers.count == 1 || setOfNumbers.count == 3
             
+            // Check to see if all properties form sets (meaning the cards form a set)
             selectedCardsAreASet = shapesAreASet && colorsAreASet && shadingsAreASet && numbersAreASet
         } else {
             selectedCardsAreASet = nil
