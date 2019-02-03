@@ -31,11 +31,23 @@ struct SetGame {
         
         // Initialize cardsInPlay to be the first 12 cards of cardsInDeck
         cardsInPlay = Array(cardsInDeck[0..<12])
+        cardsInDeck.removeSubrange(0..<12)
     }
     
     mutating func chooseCard(_ card: Card) {
         if selectedCards.count == 3 {
-            //remove the three cards from selected cards list
+            
+            if selectedCardsAreASet ?? false {
+                for selectedCard in selectedCards {
+                    let indexOfSelectedCard = cardsInPlay.firstIndex(of: selectedCard)!
+                    let replacementCard = cardsInDeck.removeFirst()
+                    
+                    cardsInPlay.remove(at: indexOfSelectedCard)
+                    cardsInPlay.insert(replacementCard, at: indexOfSelectedCard)
+                }
+            }
+            
+            // Remove the three cards from selected cards list
             selectedCards.removeAll()
         }
         
