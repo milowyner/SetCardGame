@@ -29,33 +29,43 @@ struct SetGame {
         }
         cardsInDeck.shuffle()
         
-        // Initialize cardsInPlay to be the first 12 cards of cardsInDeck
+        // Initialize cardsInPlay with the first 12 cards of cardsInDeck
         cardsInPlay = Array(cardsInDeck[0..<12])
         cardsInDeck.removeSubrange(0..<12)
     }
     
     mutating func chooseCard(_ card: Card) {
+        
+        // If three cards are already selected
         if selectedCards.count == 3 {
-            
-            if selectedCardsAreASet ?? false {
+            // If those selected cards form a set
+            if selectedCardsAreASet! {
+                // Replace them with new cards from the deck
                 for selectedCard in selectedCards {
                     let indexOfSelectedCard = cardsInPlay.firstIndex(of: selectedCard)!
                     let replacementCard = cardsInDeck.removeFirst()
-                    
                     cardsInPlay.remove(at: indexOfSelectedCard)
                     cardsInPlay.insert(replacementCard, at: indexOfSelectedCard)
                 }
+                
+                // If the chosen card is one of the selected cards
+                if selectedCards.contains(card) {
+                    // Remove selected cards
+                    selectedCards.removeAll()
+                } else {
+                    // Remove selected cards and then select the new card
+                    selectedCards.removeAll()
+                    selectedCards.append(card)
+                }
+            } else {
+                // Clear selected cards
+                selectedCards.removeAll()
+                // Select or deselect chosen card
+                toggleSelection(for: card)
             }
-            
-            // Remove the three cards from selected cards list
-            selectedCards.removeAll()
-        }
-        
-        // Select or deselect card
-        if let indexOfFoundCard = selectedCards.firstIndex(of: card) {
-            selectedCards.remove(at: indexOfFoundCard)
         } else {
-            selectedCards.append(card)
+            // Select or deselect chosen card
+            toggleSelection(for: card)
         }
         
         // Check to see if cards form a set
@@ -81,6 +91,15 @@ struct SetGame {
             selectedCardsAreASet = shapesAreASet && colorsAreASet && shadingsAreASet && numbersAreASet
         } else {
             selectedCardsAreASet = nil
+        }
+    }
+    
+    // Selects card if it was deselected; deselects card if it was selected.
+    private mutating func toggleSelection(for card: Card) {
+        if let indexOfFoundCard = selectedCards.firstIndex(of: card) {
+            selectedCards.remove(at: indexOfFoundCard)
+        } else {
+            selectedCards.append(card)
         }
     }
 }
