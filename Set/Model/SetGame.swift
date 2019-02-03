@@ -48,6 +48,11 @@ struct SetGame {
         
         // Check to see if cards form a set
         if selectedCards.count == 3 {
+            
+            // TODO: Make this code a lot cleaner
+            // Possibly by having some function like isASet(array:property:) that takes an array and a property as
+            // arguments and returns true if the property of the elements in the array form a set
+            
             // Create a swift set for each property
             let setOfShapes = Set([selectedCards[0].shape, selectedCards[1].shape, selectedCards[2].shape])
             let setOfColors = Set([selectedCards[0].color, selectedCards[1].color, selectedCards[2].color])
