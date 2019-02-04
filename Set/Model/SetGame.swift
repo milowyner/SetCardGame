@@ -47,28 +47,13 @@ struct SetGame {
         if selectedCards.count == 3 {
             // If those selected cards form a set
             if selectedCardsAreASet! {
-                // Replace them with new cards from the deck
-                for selectedCard in selectedCards {
-                    let indexOfSelectedCard = cardsInPlay.firstIndex(of: selectedCard)!
-                    // If deck isn't empty
-                    if cardsInDeck.count != 0 {
-                        // Remove selected card and replace with a new card from deck
-                        cardsInPlay.remove(at: indexOfSelectedCard)
-                        let replacementCard = cardsInDeck.removeFirst()
-                        cardsInPlay.insert(replacementCard, at: indexOfSelectedCard)
-                    } else {
-                        // Set the card that was there to nil
-                        cardsInPlay[indexOfSelectedCard] = nil
-                    }
-                }
-                
                 // If the chosen card is one of the selected cards
                 if selectedCards.contains(card) {
-                    // Remove selected cards
-                    selectedCards.removeAll()
+                    // Replace selected cards
+                    replaceMatchedSet()
                 } else {
-                    // Remove selected cards and then select the new card
-                    selectedCards.removeAll()
+                    // Replace selected cards and then select the new card
+                    replaceMatchedSet()
                     selectedCards.append(card)
                 }
             } else {
@@ -119,6 +104,9 @@ struct SetGame {
     
     // Deals three more cards by moving them from cardsInDeck to cardsInPlay
     mutating func dealThreeMoreCards() {
+        if selectedCardsAreASet ?? false {
+            replaceMatchedSet()
+        }
         scoreFactor -= 2
         if cardsInDeck.count != 0 {
             cardsInPlay.append(contentsOf: Array(cardsInDeck[0..<3]))
@@ -133,5 +121,23 @@ struct SetGame {
         } else {
             selectedCards.append(card)
         }
+    }
+    
+    // Replaces matched set cards with new cards from the deck.
+    private mutating func replaceMatchedSet() {
+        for selectedCard in selectedCards {
+            let indexOfSelectedCard = cardsInPlay.firstIndex(of: selectedCard)!
+            // If deck isn't empty
+            if cardsInDeck.count != 0 {
+                // Remove selected card and replace with a new card from deck
+                cardsInPlay.remove(at: indexOfSelectedCard)
+                let replacementCard = cardsInDeck.removeFirst()
+                cardsInPlay.insert(replacementCard, at: indexOfSelectedCard)
+            } else {
+                // Set the card that was there to nil
+                cardsInPlay[indexOfSelectedCard] = nil
+            }
+        }
+        selectedCards.removeAll()
     }
 }
