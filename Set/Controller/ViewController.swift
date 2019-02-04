@@ -135,6 +135,8 @@ class ViewController: UIViewController {
         if cardButtons.count == cardButtonsInPlay.count || game.cardsInDeck.count == 0 {
             dealMoreCardsButton.isEnabled = false
         }
+        
+        scoreLabel.text = "Score: \(game.score)"
     }
 }
 

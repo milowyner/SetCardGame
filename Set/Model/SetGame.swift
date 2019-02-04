@@ -15,8 +15,12 @@ struct SetGame {
     private(set) var cardsInPlay = [Card?]()
     // List of selected cards
     private(set) var selectedCards = [Card]()
-    
+    // Bool detecting whether or not the selected cards form a set
     private(set) var selectedCardsAreASet: Bool?
+    // Number keeping track of user's score
+    private(set) var score: Int
+    
+    private var scoreFactor: Int = 10
     
     init() {
         // Initialize cardsInDeck to contain cards of every possible combination of properties
@@ -33,6 +37,8 @@ struct SetGame {
         // Initialize cardsInPlay with the first 12 cards of cardsInDeck
         cardsInPlay = Array(cardsInDeck[0..<12])
         cardsInDeck.removeSubrange(0..<12)
+        
+        score = 0
     }
     
     mutating func chooseCard(_ card: Card) {
@@ -100,6 +106,11 @@ struct SetGame {
             
             // Check to see if all properties form sets (meaning the cards form a set)
             selectedCardsAreASet = shapesAreASet && colorsAreASet && shadingsAreASet && numbersAreASet
+            if selectedCardsAreASet! {
+                score += scoreFactor
+            } else {
+                score -= 5
+            }
 //            selectedCardsAreASet = true
         } else {
             selectedCardsAreASet = nil
@@ -108,6 +119,7 @@ struct SetGame {
     
     // Deals three more cards by moving them from cardsInDeck to cardsInPlay
     mutating func dealThreeMoreCards() {
+        scoreFactor -= 2
         if cardsInDeck.count != 0 {
             cardsInPlay.append(contentsOf: Array(cardsInDeck[0..<3]))
             cardsInDeck.removeSubrange(0..<3)
