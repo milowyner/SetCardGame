@@ -48,7 +48,9 @@ class ViewController: UIViewController {
 
     @IBAction func cardPressed(_ sender: UIButton) {
         let indexOfChosenCard = cardButtons.firstIndex(of: sender)!
-        let chosenCard = game.cardsInPlay[indexOfChosenCard]
+        guard let chosenCard = game.cardsInPlay[indexOfChosenCard] else {
+            fatalError("Chosen card is nil")
+        }
         game.chooseCard(chosenCard)
         
         updateUI()
@@ -67,12 +69,10 @@ class ViewController: UIViewController {
     
     // Updates the UI to represent the card's properties and color the card borders when selected.
     func updateUI() {
-        
         // Update cards based on the model's four properties (shape, color, shading, and number)
         for (index, cardButton) in cardButtonsInPlay.enumerated() {
-            if index < game.cardsInPlay.count {
-                let card = game.cardsInPlay[index]
-                
+            // If there is a card to show
+            if let card = game.cardsInPlay[index] {
                 // Assign color to the card
                 cardButton.tintColor = colors[card.color]
                 
@@ -103,6 +103,7 @@ class ViewController: UIViewController {
                 let newAttributedTitle = NSAttributedString(string: repeatedShapes, attributes: shadingAttributes)
                 cardButton.setAttributedTitle(newAttributedTitle, for: .normal)
             } else {
+                // Create an empty space where the card was
                 cardButton.setAttributedTitle(nil, for: .normal)
                 cardButton.backgroundColor = nil
                 cardButton.isEnabled = false

@@ -12,7 +12,7 @@ struct SetGame {
     // List of all card in the deck
     private(set) var cardsInDeck = [Card]()
     // List of cards in play
-    private(set) var cardsInPlay = [Card]()
+    private(set) var cardsInPlay = [Card?]()
     // List of selected cards
     private(set) var selectedCards = [Card]()
     
@@ -36,7 +36,7 @@ struct SetGame {
     }
     
     mutating func chooseCard(_ card: Card) {
-        
+//        print(cardsInPlay)
         // If three cards are already selected
         if selectedCards.count == 3 {
             // If those selected cards form a set
@@ -44,12 +44,15 @@ struct SetGame {
                 // Replace them with new cards from the deck
                 for selectedCard in selectedCards {
                     let indexOfSelectedCard = cardsInPlay.firstIndex(of: selectedCard)!
-                    cardsInPlay.remove(at: indexOfSelectedCard)
-                    
                     // If deck isn't empty
                     if cardsInDeck.count != 0 {
+                        // Remove selected card and replace with a new card from deck
+                        cardsInPlay.remove(at: indexOfSelectedCard)
                         let replacementCard = cardsInDeck.removeFirst()
                         cardsInPlay.insert(replacementCard, at: indexOfSelectedCard)
+                    } else {
+                        // Set the card that was there to nil
+                        cardsInPlay[indexOfSelectedCard] = nil
                     }
                 }
                 
@@ -106,7 +109,7 @@ struct SetGame {
     // Deals three more cards by moving them from cardsInDeck to cardsInPlay
     mutating func dealThreeMoreCards() {
         if cardsInDeck.count != 0 {
-            cardsInPlay.append(contentsOf: cardsInDeck[0..<3])
+            cardsInPlay.append(contentsOf: Array(cardsInDeck[0..<3]))
             cardsInDeck.removeSubrange(0..<3)
         }
     }
