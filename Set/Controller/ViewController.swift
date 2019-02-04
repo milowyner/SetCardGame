@@ -58,7 +58,6 @@ class ViewController: UIViewController {
     
     @IBAction func dealThreeMoreCardsPressed(_ sender: UIButton) {
         game.dealThreeMoreCards()
-        // Unhide new card buttons
         numberOfCardButtonsInPlay += 3
         updateUI()
     }
@@ -148,6 +147,7 @@ class ViewController: UIViewController {
     
     // Sets the color of the selected card borders.
     func updateBorders() {
+        // Set borderColor based on if selcted cards form a set
         let borderColor: CGColor
         if let cardsAreASet = game.selectedCardsAreASet {
             if cardsAreASet {
@@ -158,9 +158,11 @@ class ViewController: UIViewController {
         } else {
             borderColor = #colorLiteral(red: 0, green: 0.4392156863, blue: 0.9607843137, alpha: 1)
         }
+        // Clear all borders
         for card in cardButtons {
             card.layer.borderWidth = 0.0
         }
+        // Draw borders for selected cards based on borderColor
         for selectedCard in game.selectedCards {
             let indexFromGameCards = game.cardsInPlay.firstIndex(of: selectedCard)!
             let card = cardButtons[indexFromGameCards]

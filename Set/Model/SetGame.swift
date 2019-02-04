@@ -32,7 +32,6 @@ struct SetGame {
             cardsInDeck.append(card)
         }
         cardsInDeck.shuffle()
-        cardsInDeck.removeSubrange(18..<cardsInDeck.count)
         
         // Initialize cardsInPlay with the first 12 cards of cardsInDeck
         cardsInPlay = Array(cardsInDeck[0..<12])
@@ -42,7 +41,6 @@ struct SetGame {
     }
     
     mutating func chooseCard(_ card: Card) {
-//        print(cardsInPlay)
         // If three cards are already selected
         if selectedCards.count == 3 {
             // If those selected cards form a set
@@ -70,9 +68,6 @@ struct SetGame {
         // Check to see if cards form a set
         if selectedCards.count == 3 {
             
-//            print(cardsInDeck.count)
-//            print(cardsInPlay.count)
-            
             // TODO: Make this code a lot cleaner
             // Possibly by having some function like isASet(array:property:) that takes an array and a property as
             // arguments and returns true if the property of the elements in the array form a set
@@ -91,7 +86,6 @@ struct SetGame {
             
             // Check to see if all properties form sets (meaning the cards form a set)
             selectedCardsAreASet = shapesAreASet && colorsAreASet && shadingsAreASet && numbersAreASet
-            selectedCardsAreASet = true
             if selectedCardsAreASet! {
                 score += scoreFactor
             } else {
