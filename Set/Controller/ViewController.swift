@@ -70,37 +70,43 @@ class ViewController: UIViewController {
         
         // Update cards based on the model's four properties (shape, color, shading, and number)
         for (index, cardButton) in cardButtonsInPlay.enumerated() {
-            let card = game.cardsInPlay[index]
-            
-            // Assign color to the card
-            cardButton.tintColor = colors[card.color]
-            
-            // Set the shape and repeat it based on number property
-            let repeatedShapes = String(repeating: shapes[card.shape].string, count: card.number + 1)
-            
-            // Set the shading attributes
-            var shadingAttributes: [NSAttributedString.Key: Any]
-            switch card.shading {
-            case 0:
-                // Solid
-                shadingAttributes = [:]
-            case 1:
-                // "Striped" (actually just slightly opaque)
-                shadingAttributes = [
-                    NSAttributedString.Key.foregroundColor: colors[card.color].withAlphaComponent(0.4),
-                    NSAttributedString.Key.strokeColor: colors[card.color],
-                    NSAttributedString.Key.strokeWidth: -6.0
-                ]
-            case 2:
-                // Outlined
-                shadingAttributes = [NSAttributedString.Key.strokeWidth: 6.0]
-            default:
-                fatalError("There should only be 3 different shading options")
+            if index < game.cardsInPlay.count {
+                let card = game.cardsInPlay[index]
+                
+                // Assign color to the card
+                cardButton.tintColor = colors[card.color]
+                
+                // Set the shape and repeat it based on number property
+                let repeatedShapes = String(repeating: shapes[card.shape].string, count: card.number + 1)
+                
+                // Set the shading attributes
+                var shadingAttributes: [NSAttributedString.Key: Any]
+                switch card.shading {
+                case 0:
+                    // Solid
+                    shadingAttributes = [:]
+                case 1:
+                    // "Striped" (actually just slightly opaque)
+                    shadingAttributes = [
+                        NSAttributedString.Key.foregroundColor: colors[card.color].withAlphaComponent(0.4),
+                        NSAttributedString.Key.strokeColor: colors[card.color],
+                        NSAttributedString.Key.strokeWidth: -6.0
+                    ]
+                case 2:
+                    // Outlined
+                    shadingAttributes = [NSAttributedString.Key.strokeWidth: 6.0]
+                default:
+                    fatalError("There should only be 3 different shading options")
+                }
+                
+                // Set the card button's title using the repeated shapes string and shading attributes
+                let newAttributedTitle = NSAttributedString(string: repeatedShapes, attributes: shadingAttributes)
+                cardButton.setAttributedTitle(newAttributedTitle, for: .normal)
+            } else {
+                cardButton.setAttributedTitle(nil, for: .normal)
+                cardButton.backgroundColor = nil
+                cardButton.isEnabled = false
             }
-            
-            // Set the card button's title using the repeated shapes string and shading attributes
-            let newAttributedTitle = NSAttributedString(string: repeatedShapes, attributes: shadingAttributes)
-            cardButton.setAttributedTitle(newAttributedTitle, for: .normal)
         }
         
         // Set the color of the selected card borders
@@ -124,8 +130,8 @@ class ViewController: UIViewController {
             card.layer.borderColor = borderColor
         }
         
-        // Disable Deal 3 More Cards button if no more room
-        if cardButtons.count == cardButtonsInPlay.count {
+        // Disable Deal 3 More Cards button if no more room or deck is empty
+        if cardButtons.count == cardButtonsInPlay.count || game.cardsInDeck.count == 0 {
             dealMoreCardsButton.isEnabled = false
         }
     }
