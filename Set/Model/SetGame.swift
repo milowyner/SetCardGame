@@ -10,7 +10,7 @@ import Foundation
 
 struct SetGame {
     // List of all card in the deck
-    private var cardsInDeck = [Card]()
+    private(set) var cardsInDeck = [Card]()
     // List of cards in play
     private(set) var cardsInPlay = [Card]()
     // List of selected cards
@@ -91,6 +91,14 @@ struct SetGame {
             selectedCardsAreASet = shapesAreASet && colorsAreASet && shadingsAreASet && numbersAreASet
         } else {
             selectedCardsAreASet = nil
+        }
+    }
+    
+    // Deals three more cards by moving them from cardsInDeck to cardsInPlay
+    mutating func dealThreeMoreCards() {
+        if cardsInDeck.count != 0 {
+            cardsInPlay.append(contentsOf: cardsInDeck[0..<3])
+            cardsInDeck.removeSubrange(0..<3)
         }
     }
     

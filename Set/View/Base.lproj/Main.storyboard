@@ -42,7 +42,6 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="122" height="73.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="▲"/>
                                                 <connections>
                                                     <action selector="cardPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Sry-vn-5QK"/>
                                                 </connections>
@@ -51,7 +50,6 @@
                                                 <rect key="frame" x="130" y="0.0" width="122" height="73.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="▲"/>
                                                 <connections>
                                                     <action selector="cardPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qqf-9K-blh"/>
                                                 </connections>
@@ -60,7 +58,6 @@
                                                 <rect key="frame" x="260" y="0.0" width="122" height="73.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="▲"/>
                                                 <connections>
                                                     <action selector="cardPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dzx-Xn-9sD"/>
                                                 </connections>
@@ -74,7 +71,6 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="122" height="73"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="▲"/>
                                                 <connections>
                                                     <action selector="cardPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VSb-n4-XHY"/>
                                                 </connections>
@@ -83,7 +79,6 @@
                                                 <rect key="frame" x="130" y="0.0" width="122" height="73"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="▲"/>
                                                 <connections>
                                                     <action selector="cardPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xgi-K8-FZb"/>
                                                 </connections>
@@ -92,7 +87,6 @@
                                                 <rect key="frame" x="260" y="0.0" width="122" height="73"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="▲"/>
                                                 <connections>
                                                     <action selector="cardPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xKH-jS-I3D"/>
                                                 </connections>
@@ -106,7 +100,6 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="122" height="73.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="▲"/>
                                                 <connections>
                                                     <action selector="cardPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sgc-3s-DnS"/>
                                                 </connections>
@@ -115,7 +108,6 @@
                                                 <rect key="frame" x="130" y="0.0" width="122" height="73.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="▲"/>
                                                 <connections>
                                                     <action selector="cardPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EaD-Ow-Z97"/>
                                                 </connections>
@@ -124,7 +116,6 @@
                                                 <rect key="frame" x="260" y="0.0" width="122" height="73.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="▲"/>
                                                 <connections>
                                                     <action selector="cardPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KvC-Sq-csp"/>
                                                 </connections>
@@ -138,7 +129,6 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="122" height="73"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="▲"/>
                                                 <connections>
                                                     <action selector="cardPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xFj-fo-kY9"/>
                                                 </connections>
@@ -147,7 +137,6 @@
                                                 <rect key="frame" x="130" y="0.0" width="122" height="73"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="▲"/>
                                                 <connections>
                                                     <action selector="cardPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WSw-lb-Xn6"/>
                                                 </connections>
@@ -156,7 +145,6 @@
                                                 <rect key="frame" x="260" y="0.0" width="122" height="73"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="▲"/>
                                                 <connections>
                                                     <action selector="cardPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OO2-FJ-nC9"/>
                                                 </connections>
@@ -170,19 +158,25 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="60"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="▲"/>
+                                                <connections>
+                                                    <action selector="cardPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Tbn-hg-3fh"/>
+                                                </connections>
                                             </button>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MeP-Bj-ZRx" userLabel="Card Button">
                                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="60"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="▲"/>
+                                                <connections>
+                                                    <action selector="cardPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iaC-AS-hdQ"/>
+                                                </connections>
                                             </button>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dzr-HT-HNz" userLabel="Card Button">
                                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="60"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="▲"/>
+                                                <connections>
+                                                    <action selector="cardPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VBf-4B-g3Q"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -193,19 +187,25 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="60"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="▲"/>
+                                                <connections>
+                                                    <action selector="cardPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MuX-mb-FWY"/>
+                                                </connections>
                                             </button>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aCa-Bp-Cpk" userLabel="Card Button">
                                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="60"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="▲"/>
+                                                <connections>
+                                                    <action selector="cardPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="w2T-U0-a2z"/>
+                                                </connections>
                                             </button>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Cc-FR-z3t" userLabel="Card Button">
                                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="60"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="▲"/>
+                                                <connections>
+                                                    <action selector="cardPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="imr-4r-pss"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -216,19 +216,25 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="60"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="▲"/>
+                                                <connections>
+                                                    <action selector="cardPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Jhi-w4-THr"/>
+                                                </connections>
                                             </button>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ONO-4r-JmM" userLabel="Card Button">
                                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="60"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="▲"/>
+                                                <connections>
+                                                    <action selector="cardPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TL9-Te-DnK"/>
+                                                </connections>
                                             </button>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PWc-2e-R6h" userLabel="Card Button">
                                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="60"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="▲"/>
+                                                <connections>
+                                                    <action selector="cardPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="U9q-PT-8Pw"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -239,19 +245,25 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="60"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="▲"/>
+                                                <connections>
+                                                    <action selector="cardPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="U6P-c5-Bj0"/>
+                                                </connections>
                                             </button>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Ns-EU-Vhs" userLabel="Card Button">
                                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="60"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="▲"/>
+                                                <connections>
+                                                    <action selector="cardPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zCE-BC-IsA"/>
+                                                </connections>
                                             </button>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DH9-Pq-oOf" userLabel="Card Button">
                                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="60"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="▲"/>
+                                                <connections>
+                                                    <action selector="cardPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="s20-uf-gay"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -265,6 +277,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                 <state key="normal" title="Deal 3 More Cards"/>
+                                <connections>
+                                    <action selector="dealThreeMoreCardsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="g1N-2j-MG4"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Vo-Oh-QJE">
                                 <rect key="frame" x="276" y="786" width="122" height="60"/>

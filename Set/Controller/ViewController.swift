@@ -54,6 +54,17 @@ class ViewController: UIViewController {
         updateUI()
     }
     
+    @IBAction func dealThreeMoreCardsPressed(_ sender: UIButton) {
+        game.dealThreeMoreCards()
+        // Unhide new card buttons
+        for _ in 1...3 {
+            let newCardButton = cardButtons[cardButtonsInPlay.count]
+            cardButtonsInPlay.append(newCardButton)
+            newCardButton.isHidden = false
+        }
+        updateUI()
+    }
+    
     // Updates the UI to represent the card's properties and color the card borders when selected.
     func updateUI() {
         
@@ -111,6 +122,11 @@ class ViewController: UIViewController {
             let card = cardButtons[indexFromGameCards]
             card.layer.borderWidth = 4.0
             card.layer.borderColor = borderColor
+        }
+        
+        // Disable Deal 3 More Cards button if no more room
+        if cardButtons.count == cardButtonsInPlay.count {
+            dealMoreCardsButton.isEnabled = false
         }
     }
 }
