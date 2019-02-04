@@ -32,7 +32,7 @@ struct SetGame {
             cardsInDeck.append(card)
         }
         cardsInDeck.shuffle()
-//        cardsInDeck.removeSubrange(18..<cardsInDeck.count)
+        cardsInDeck.removeSubrange(18..<cardsInDeck.count)
         
         // Initialize cardsInPlay with the first 12 cards of cardsInDeck
         cardsInPlay = Array(cardsInDeck[0..<12])
@@ -106,12 +106,12 @@ struct SetGame {
             
             // Check to see if all properties form sets (meaning the cards form a set)
             selectedCardsAreASet = shapesAreASet && colorsAreASet && shadingsAreASet && numbersAreASet
+            selectedCardsAreASet = true
             if selectedCardsAreASet! {
                 score += scoreFactor
             } else {
                 score -= 5
             }
-//            selectedCardsAreASet = true
         } else {
             selectedCardsAreASet = nil
         }

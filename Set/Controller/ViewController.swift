@@ -12,7 +12,7 @@ class ViewController: UIViewController {
 
     // List of card buttons in UI
     @IBOutlet var cardButtons: [UIButton]!
-    @IBOutlet var cardButtonsInPlay: [UIButton]!
+    var numberOfCardButtonsInPlay: Int = 12
     
     @IBOutlet weak var dealMoreCardsButton: UIButton!
     @IBOutlet weak var newGameButton: UIButton!
@@ -59,54 +59,68 @@ class ViewController: UIViewController {
     @IBAction func dealThreeMoreCardsPressed(_ sender: UIButton) {
         game.dealThreeMoreCards()
         // Unhide new card buttons
-        for _ in 1...3 {
-            let newCardButton = cardButtons[cardButtonsInPlay.count]
-            cardButtonsInPlay.append(newCardButton)
-            newCardButton.isHidden = false
-        }
+        numberOfCardButtonsInPlay += 3
+        updateUI()
+    }
+    
+    @IBAction func newGamePressed(_ sender: UIButton) {
+        game = SetGame()
+        numberOfCardButtonsInPlay = 12
         updateUI()
     }
     
     // Updates the UI to represent the card's properties and color the card borders when selected.
     func updateUI() {
         // Update cards based on the model's four properties (shape, color, shading, and number)
-        for (index, cardButton) in cardButtonsInPlay.enumerated() {
-            // If there is a card to show
-            if let card = game.cardsInPlay[index] {
-                // Assign color to the card
-                cardButton.tintColor = colors[card.color]
-                
-                // Set the shape and repeat it based on number property
-                let repeatedShapes = String(repeating: shapes[card.shape].string, count: card.number + 1)
-                
-                // Set the shading attributes
-                var shadingAttributes: [NSAttributedString.Key: Any]
-                switch card.shading {
-                case 0:
-                    // Solid
-                    shadingAttributes = [:]
-                case 1:
-                    // "Striped" (actually just slightly opaque)
-                    shadingAttributes = [
-                        NSAttributedString.Key.foregroundColor: colors[card.color].withAlphaComponent(0.4),
-                        NSAttributedString.Key.strokeColor: colors[card.color],
-                        NSAttributedString.Key.strokeWidth: -6.0
-                    ]
-                case 2:
-                    // Outlined
-                    shadingAttributes = [NSAttributedString.Key.strokeWidth: 6.0]
-                default:
-                    fatalError("There should only be 3 different shading options")
+        for (index, cardButton) in cardButtons.enumerated() {
+            if index < numberOfCardButtonsInPlay {
+                cardButton.isHidden = false
+                // If there is a card to show
+                if let card = game.cardsInPlay[index] {
+                    cardButton.isEnabled = true
+                    
+                    // Assign color to the card
+                    cardButton.tintColor = colors[card.color]
+                    
+                    // Set the shape and repeat it based on number property
+                    let repeatedShapes = String(repeating: shapes[card.shape].string, count: card.number + 1)
+                    
+                    // Set the shading attributes
+                    var shadingAttributes: [NSAttributedString.Key: Any]
+                    switch card.shading {
+                    case 0:
+                        // Solid
+                        shadingAttributes = [:]
+                    case 1:
+                        // "Striped" (actually just slightly opaque)
+                        shadingAttributes = [
+                            NSAttributedString.Key.foregroundColor: colors[card.color].withAlphaComponent(0.4),
+                            NSAttributedString.Key.strokeColor: colors[card.color],
+                            NSAttributedString.Key.strokeWidth: -6.0
+                        ]
+                    case 2:
+                        // Outlined
+                        shadingAttributes = [NSAttributedString.Key.strokeWidth: 6.0]
+                    default:
+                        fatalError("There should only be 3 different shading options")
+                    }
+                    
+                    // Set the card button's title using the repeated shapes string and shading attributes
+                    let newAttributedTitle = NSAttributedString(string: repeatedShapes, attributes: shadingAttributes)
+                    cardButton.setAttributedTitle(newAttributedTitle, for: .normal)
+                    
+                    cardButton.backgroundColor = UIColor.white
+                } else {
+                    // Create an empty space where the card was
+                    cardButton.setAttributedTitle(nil, for: .normal)
+                    cardButton.backgroundColor = nil
+                    cardButton.isEnabled = false
                 }
-                
-                // Set the card button's title using the repeated shapes string and shading attributes
-                let newAttributedTitle = NSAttributedString(string: repeatedShapes, attributes: shadingAttributes)
-                cardButton.setAttributedTitle(newAttributedTitle, for: .normal)
             } else {
-                // Create an empty space where the card was
                 cardButton.setAttributedTitle(nil, for: .normal)
                 cardButton.backgroundColor = nil
                 cardButton.isEnabled = false
+                cardButton.isHidden = true
             }
         }
         
@@ -132,8 +146,10 @@ class ViewController: UIViewController {
         }
         
         // Disable Deal 3 More Cards button if no more room or deck is empty
-        if cardButtons.count == cardButtonsInPlay.count || game.cardsInDeck.count == 0 {
+        if numberOfCardButtonsInPlay == cardButtons.count || game.cardsInDeck.count == 0 {
             dealMoreCardsButton.isEnabled = false
+        } else {
+            dealMoreCardsButton.isEnabled = true
         }
         
         scoreLabel.text = "Score: \(game.score)"
