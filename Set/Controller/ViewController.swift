@@ -71,60 +71,83 @@ class ViewController: UIViewController {
     
     // Updates the UI to represent the card's properties and color the card borders when selected.
     func updateUI() {
-        // Update cards based on the model's four properties (shape, color, shading, and number)
+        
+        // Draw all visible card buttons using the properties from the model's cards
         for (index, cardButton) in cardButtons.enumerated() {
+            // If the cardButton is in play
             if index < numberOfCardButtonsInPlay {
                 cardButton.isHidden = false
                 // If there is a card to show
                 if let card = game.cardsInPlay[index] {
+                    // Enable card button
                     cardButton.isEnabled = true
-                    
-                    // Assign color to the card
-                    cardButton.tintColor = colors[card.color]
-                    
-                    // Set the shape and repeat it based on number property
-                    let repeatedShapes = String(repeating: shapes[card.shape].string, count: card.number + 1)
-                    
-                    // Set the shading attributes
-                    var shadingAttributes: [NSAttributedString.Key: Any]
-                    switch card.shading {
-                    case 0:
-                        // Solid
-                        shadingAttributes = [:]
-                    case 1:
-                        // "Striped" (actually just slightly opaque)
-                        shadingAttributes = [
-                            NSAttributedString.Key.foregroundColor: colors[card.color].withAlphaComponent(0.4),
-                            NSAttributedString.Key.strokeColor: colors[card.color],
-                            NSAttributedString.Key.strokeWidth: -6.0
-                        ]
-                    case 2:
-                        // Outlined
-                        shadingAttributes = [NSAttributedString.Key.strokeWidth: 6.0]
-                    default:
-                        fatalError("There should only be 3 different shading options")
-                    }
-                    
-                    // Set the card button's title using the repeated shapes string and shading attributes
-                    let newAttributedTitle = NSAttributedString(string: repeatedShapes, attributes: shadingAttributes)
-                    cardButton.setAttributedTitle(newAttributedTitle, for: .normal)
-                    
                     cardButton.backgroundColor = UIColor.white
+                    // Update cardButton's properties based on properties of card
+                    updateProperties(of: cardButton, from: card)
                 } else {
-                    // Create an empty space where the card was
-                    cardButton.setAttributedTitle(nil, for: .normal)
-                    cardButton.backgroundColor = nil
-                    cardButton.isEnabled = false
+                    // Create an empty space where the card button was by disabling it
+                    disable(cardButton)
                 }
             } else {
-                cardButton.setAttributedTitle(nil, for: .normal)
-                cardButton.backgroundColor = nil
-                cardButton.isEnabled = false
+                // Disable and hide the card button from the UI
+                disable(cardButton)
                 cardButton.isHidden = true
             }
         }
+        // Draw borders around cards that are selected
+        updateBorders()
         
-        // Set the color of the selected card borders
+        // Disable Deal 3 More Cards button if no more room or deck is empty
+        if numberOfCardButtonsInPlay == cardButtons.count || game.cardsInDeck.count == 0 {
+            dealMoreCardsButton.isEnabled = false
+        } else {
+            dealMoreCardsButton.isEnabled = true
+        }
+        
+        // Update score
+        scoreLabel.text = "Score: \(game.score)"
+    }
+    
+    // Disables cardButton by clearing title and background and setting isEnabled to false.
+    func disable(_ cardButton: UIButton) {
+        cardButton.setAttributedTitle(nil, for: .normal)
+        cardButton.backgroundColor = nil
+        cardButton.isEnabled = false
+    }
+    
+    // Updates cardButton based on the four properties (shape, color, shading, and number) of card.
+    func updateProperties(of cardButton: UIButton, from card: Card) {
+        // Assign color to the card
+        cardButton.tintColor = colors[card.color]
+        
+        // Set the shape and repeat it based on number property
+        let repeatedShapes = String(repeating: shapes[card.shape].string, count: card.number + 1)
+        
+        // Set the shading attributes
+        var shadingAttributes: [NSAttributedString.Key: Any]
+        switch card.shading {
+        case 0: // Solid
+            shadingAttributes = [:]
+        case 1: // "Striped" (actually just slightly opaque)
+            shadingAttributes = [
+                NSAttributedString.Key.foregroundColor: colors[card.color].withAlphaComponent(0.4),
+                NSAttributedString.Key.strokeColor: colors[card.color],
+                NSAttributedString.Key.strokeWidth: -6.0
+            ]
+        case 2: // Outlined
+            shadingAttributes = [NSAttributedString.Key.strokeWidth: 6.0]
+        default:
+            fatalError("There should only be 3 different shading options")
+        }
+        
+        // Set the card button's title using the repeated shapes string and shading attributes
+        let newAttributedTitle = NSAttributedString(string: repeatedShapes, attributes: shadingAttributes)
+        cardButton.setAttributedTitle(newAttributedTitle, for: .normal)
+        
+    }
+    
+    // Sets the color of the selected card borders.
+    func updateBorders() {
         let borderColor: CGColor
         if let cardsAreASet = game.selectedCardsAreASet {
             if cardsAreASet {
@@ -144,15 +167,6 @@ class ViewController: UIViewController {
             card.layer.borderWidth = 4.0
             card.layer.borderColor = borderColor
         }
-        
-        // Disable Deal 3 More Cards button if no more room or deck is empty
-        if numberOfCardButtonsInPlay == cardButtons.count || game.cardsInDeck.count == 0 {
-            dealMoreCardsButton.isEnabled = false
-        } else {
-            dealMoreCardsButton.isEnabled = true
-        }
-        
-        scoreLabel.text = "Score: \(game.score)"
     }
 }
 
