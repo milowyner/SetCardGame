@@ -18,7 +18,13 @@ struct SetGame {
     // Bool detecting whether or not the selected cards form a set
     private(set) var selectedCardsAreASet: Bool?
     // Number keeping track of user's score
-    private(set) var score: Int
+    private(set) var score: Int {
+        didSet {
+            if score < 0 {
+                score = 0
+            }
+        }
+    }
     
     private var scoreFactor: Int = 10
     
