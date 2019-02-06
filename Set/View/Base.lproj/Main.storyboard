@@ -30,7 +30,9 @@
                                     <constraint firstAttribute="height" constant="60" id="ehu-jm-BK2"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                                <state key="normal" title="New Game"/>
+                                <state key="normal" title="New Game">
+                                    <color key="titleColor" name="systemBlueColor" catalog="System" colorSpace="catalog"/>
+                                </state>
                                 <connections>
                                     <action selector="newGamePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3pv-6R-5hg"/>
                                 </connections>
@@ -279,7 +281,9 @@
                                     <constraint firstAttribute="height" constant="60" id="5yb-bl-Fsy"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                                <state key="normal" title="Deck: 69"/>
+                                <state key="normal" title="Deck: 69">
+                                    <color key="titleColor" name="systemBlueColor" catalog="System" colorSpace="catalog"/>
+                                </state>
                                 <connections>
                                     <action selector="dealThreeMoreCardsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="g1N-2j-MG4"/>
                                 </connections>

@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     
     // Properties for cards
     let shapes: [NSAttributedString] = [NSAttributedString(string: "▲"), NSAttributedString(string: "●"), NSAttributedString(string: "■")]
-    let colors = [#colorLiteral(red: 0.9108959436, green: 0.3638531566, blue: 0.3811461329, alpha: 1), #colorLiteral(red: 0.3175439835, green: 0.702655077, blue: 0.4420889616, alpha: 1), #colorLiteral(red: 0.4002629519, green: 0.342028439, blue: 0.6032297611, alpha: 1)]
+    let colors = [#colorLiteral(red: 0.9108959436, green: 0.2550508642, blue: 0.2757832707, alpha: 1), #colorLiteral(red: 0.2178230739, green: 0.702655077, blue: 0.3746178072, alpha: 1), #colorLiteral(red: 0.3219855036, green: 0.2412919044, blue: 0.6032297611, alpha: 1)]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -132,7 +132,7 @@ class ViewController: UIViewController {
             shadingAttributes = [:]
         case 1: // "Striped" (actually just slightly opaque)
             shadingAttributes = [
-                NSAttributedString.Key.foregroundColor: colors[card.color].withAlphaComponent(0.4),
+                NSAttributedString.Key.foregroundColor: colors[card.color].withAlphaComponent(0.25),
                 NSAttributedString.Key.strokeColor: colors[card.color],
                 NSAttributedString.Key.strokeWidth: -6.0
             ]
