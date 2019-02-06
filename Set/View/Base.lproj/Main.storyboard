@@ -279,7 +279,7 @@
                                     <constraint firstAttribute="height" constant="60" id="5yb-bl-Fsy"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                                <state key="normal" title="Deal 3 More Cards"/>
+                                <state key="normal" title="Deck: 69"/>
                                 <connections>
                                     <action selector="dealThreeMoreCardsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="g1N-2j-MG4"/>
                                 </connections>

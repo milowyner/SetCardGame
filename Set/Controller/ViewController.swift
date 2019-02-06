@@ -96,6 +96,9 @@ class ViewController: UIViewController {
         // Draw borders around cards that are selected
         updateBorders()
         
+        // Update number of cards left in deck
+        dealMoreCardsButton.setTitle("Deck: \(game.cardsInDeck.count)", for: .normal)
+        
         // Disable Deal 3 More Cards button if no more room or deck is empty
         if numberOfCardButtonsInPlay == cardButtons.count || game.cardsInDeck.count == 0 {
             dealMoreCardsButton.isEnabled = false
