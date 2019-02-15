@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-class SetCardView: UIView {
+class SetCardView: UIView { // Maybe subclass from UIButton instead of UIView
     
     enum Shape {
         case oval

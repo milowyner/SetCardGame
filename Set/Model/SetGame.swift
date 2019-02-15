@@ -12,7 +12,7 @@ struct SetGame {
     // List of all card in the deck
     private(set) var cardsInDeck = [Card]()
     // List of cards in play
-    private(set) var cardsInPlay = [Card?]()
+    var cardsInPlay = [Card?]()
     // List of selected cards
     private(set) var selectedCards = [Card]()
     // Bool detecting whether or not the selected cards form a set
