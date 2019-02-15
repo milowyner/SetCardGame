@@ -69,22 +69,40 @@ class ViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        print(cardsContainer.frame)
-        cardGrid.frame = cardsContainer.frame
-        cardGrid.cellCount = numberOfCardButtonsInPlay
-        displayCards()
-//        print(cardGrid.dimensions)
-//        for index in 0..<cardGrid.cellCount {
-//            if let cellRect = cardGrid[index] {
-//                let cardView = SetCardView(frame: cellRect.insetBy(dx: 8.0, dy: 8.0))
-//                view.addSubview(cardView)
-//            }
-//        }
+//        print(cardsContainer.frame)
+//        cardGrid.frame = cardsContainer.frame
+//        cardGrid.cellCount = numberOfCardButtonsInPlay
+//        displayCards()
+////        print(cardGrid.dimensions)
+////        for index in 0..<cardGrid.cellCount {
+////            if let cellRect = cardGrid[index] {
+////                let cardView = SetCardView(frame: cellRect.insetBy(dx: 8.0, dy: 8.0))
+////                view.addSubview(cardView)
+////            }
+////        }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let numberOfColumns = 3
+        let numberOfRows = game.cardsInPlay.count / numberOfColumns
         
+        for _ in 0..<numberOfRows {
+            let horizontalStackView = UIStackView()
+            verticalStackView.addArrangedSubview(horizontalStackView)
+            
+            horizontalStackView.axis = .horizontal
+            horizontalStackView.alignment = .fill
+            horizontalStackView.distribution = .fillEqually
+            horizontalStackView.spacing = 16
+            
+            for _ in 0..<numberOfColumns {
+                let cardView = SetCardView()
+                horizontalStackView.addArrangedSubview(cardView)
+            }
+            
+            updateUI()
+        }
         
 //        for _ in 1...3 {
 //            let cardView = SetCardView()
@@ -130,16 +148,19 @@ class ViewController: UIViewController {
     }
     
     @IBAction func dealThreeMoreCardsPressed(_ sender: UIButton) {
-        game.dealThreeMoreCards()
-        for index in 0..<3 {
-            if let cardRect = cardGrid[index] {
-                let cardView = SetCardView(frame: cardRect.insetBy(dx: 8.0, dy: 8.0))
-                cardsContainer.addSubview(cardView)
-            }
-        }
-        updateCards()
-//        game.dealThreeMoreCards()
-//        numberOfCardButtonsInPlay += 3
+//        let horizontalStackView = UIStackView()
+//        verticalStackView.addArrangedSubview(horizontalStackView)
+//
+//        horizontalStackView.axis = .horizontal
+//        horizontalStackView.alignment = .fill
+//        horizontalStackView.distribution = .fillEqually
+//        horizontalStackView.spacing = 16
+//
+//        for _ in 0..<3 {
+//            let cardView = SetCardView()
+//            horizontalStackView.addArrangedSubview(cardView)
+//        }
+//
 //        updateUI()
     }
     
@@ -182,7 +203,11 @@ class ViewController: UIViewController {
         
         
         // Update number of cards left in deck
-        dealMoreCardsButton.setTitle("Deck: \(game.cardsInDeck.count)", for: .normal)
+        if verticalStackView.subviews.count == 0 {
+            dealMoreCardsButton.setTitle("Deck: \(verticalStackView.subviews.count)", for: .normal)
+        } else {
+            dealMoreCardsButton.setTitle("Deck: \(verticalStackView.subviews.count * verticalStackView.subviews[0].subviews.count)", for: .normal)
+        }
         
 //        // Disable Deal 3 More Cards button if no more room or deck is empty
 //        if numberOfCardButtonsInPlay == cardButtons.count || game.cardsInDeck.count == 0 {
@@ -192,7 +217,7 @@ class ViewController: UIViewController {
 //        }
         
         // Update score
-        scoreLabel.text = "Score: \(game.score)"
+//        scoreLabel.text = "Score: \(game.score)"
     }
     
     // Disables cardButton by clearing title and background and setting isEnabled to false.

@@ -59,10 +59,9 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AGt-Ws-3me" userLabel="Cards Container">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="nfY-4Q-bRv">
                                 <rect key="frame" x="16" y="128" width="382" height="642"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -71,26 +70,26 @@
                             <constraint firstItem="bhj-WQ-FZg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="PyB-fm-NWT"/>
                             <constraint firstAttribute="trailing" secondItem="AdO-ew-LU2" secondAttribute="trailing" id="QKk-hi-cMs"/>
                             <constraint firstItem="bhj-WQ-FZg" firstAttribute="width" secondItem="4Vo-Oh-QJE" secondAttribute="width" multiplier="2" id="Qkc-B4-bIB"/>
+                            <constraint firstItem="bhj-WQ-FZg" firstAttribute="top" secondItem="nfY-4Q-bRv" secondAttribute="bottom" constant="16" id="RIF-dq-Ieb"/>
                             <constraint firstItem="TLy-1T-KNf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" symbolic="YES" id="Txo-en-gp5"/>
-                            <constraint firstItem="bhj-WQ-FZg" firstAttribute="top" secondItem="AGt-Ws-3me" secondAttribute="bottom" constant="16" id="UfW-e8-hPv"/>
                             <constraint firstItem="4Vo-Oh-QJE" firstAttribute="leading" secondItem="bhj-WQ-FZg" secondAttribute="trailing" constant="16" id="Xaz-hf-cbi"/>
                             <constraint firstItem="TLy-1T-KNf" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="Xh6-Dh-U0I"/>
-                            <constraint firstItem="AGt-Ws-3me" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="awz-dd-iye"/>
-                            <constraint firstItem="AGt-Ws-3me" firstAttribute="top" secondItem="TLy-1T-KNf" secondAttribute="bottom" constant="16" id="c8L-ab-BfU"/>
+                            <constraint firstItem="nfY-4Q-bRv" firstAttribute="top" secondItem="TLy-1T-KNf" secondAttribute="bottom" constant="16" id="ZYf-kG-8G6"/>
                             <constraint firstAttribute="bottom" secondItem="AdO-ew-LU2" secondAttribute="bottom" id="eXN-ry-1vV"/>
                             <constraint firstItem="AdO-ew-LU2" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="eYt-bQ-n97"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4Vo-Oh-QJE" secondAttribute="trailing" constant="16" id="khE-94-s4k"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="TLy-1T-KNf" secondAttribute="trailing" constant="16" id="oMd-Xo-pyz"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nfY-4Q-bRv" secondAttribute="trailing" constant="16" id="pfu-Ky-6hQ"/>
+                            <constraint firstItem="nfY-4Q-bRv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="rCh-Wq-o1f"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="bhj-WQ-FZg" secondAttribute="bottom" constant="16" id="sh1-Up-ZbG"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="AGt-Ws-3me" secondAttribute="trailing" constant="16" id="waJ-VH-p5Q"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="cardsContainer" destination="AGt-Ws-3me" id="lbR-rR-L1J"/>
                         <outlet property="dealMoreCardsButton" destination="bhj-WQ-FZg" id="UOG-eg-F2A"/>
                         <outlet property="newGameButton" destination="TLy-1T-KNf" id="r4i-DV-Hoi"/>
                         <outlet property="scoreLabel" destination="4Vo-Oh-QJE" id="0Kb-eD-V59"/>
+                        <outlet property="verticalStackView" destination="nfY-4Q-bRv" id="BQd-f5-6vM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

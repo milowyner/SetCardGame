@@ -40,10 +40,11 @@ class SetCardView: UIView {
     
     private func setupView() {
         self.isOpaque = false
-        self.layer.cornerRadius = 8.0
         self.layer.shadowOpacity = 0.2
         self.layer.shadowRadius = 6.0
         self.layer.shadowOffset = CGSize(width: 0.0, height: 6.0)
+        self.contentMode = .redraw
+        print("Card view setup complete")
     }
 
     // Only override draw() if you perform custom drawing.
