@@ -21,13 +21,15 @@ class ViewController: UIViewController {
     // Set game
     var game = SetGame()
     
-    // Number of columns
-    let numberOfColumns = 3
+    // Number of columns; updates every time updateUI() is called
+    var numberOfColumns = 0
     
-    // Number of rows
-    var numberOfRows: Int {
-        return game.cardsInPlay.count / numberOfColumns
-    }
+    // Number of rows; updates every time updateUI() is called
+    var numberOfRows = 0
+    
+    // Aspect ratio of verticalStackView; updates every time viewDidLayoutSubviews is called
+    var aspectRatio: Double = 0.0
+    
     
     // Properties for cards
     let shapes: [NSAttributedString] = [NSAttributedString(string: "▲"), NSAttributedString(string: "●"), NSAttributedString(string: "■")]
@@ -35,12 +37,17 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        updateUI()
-        
         // Set visuals for other buttons in UI
         setVisuals(of: dealMoreCardsButton)
         setVisuals(of: newGameButton)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        updateUI()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        aspectRatio = Double(verticalStackView.frame.width) / Double(verticalStackView.frame.height)
     }
     
 //    @IBAction func cardPressed(_ sender: UIButton) {
@@ -63,8 +70,16 @@ class ViewController: UIViewController {
         updateUI()
     }
     
-    // Updates the UI to represent the card's properties and color the card borders when selected.
+    // Updates UI elements and dynamically draws cards on screen
     func updateUI() {
+        // Set number of columns and rows based on the aspect ratio of the card container
+        numberOfColumns = Int((Double(game.cardsInPlay.count) * aspectRatio * 0.95).squareRoot().rounded(.down))
+        numberOfRows = Int((Double(game.cardsInPlay.count) / Double(numberOfColumns)).rounded(.up))
+        
+        // Set spacing between cells based on card cell height
+        let cellHeight = Double(verticalStackView.bounds.height) / Double(numberOfRows)
+        let spacing = CGFloat(cellHeight * 0.14)
+        verticalStackView.spacing = spacing
         
         // Remove all card views
         for subview in verticalStackView.arrangedSubviews {
@@ -72,36 +87,40 @@ class ViewController: UIViewController {
         }
         
         // Add card views based on number of cards in play
-        for _ in 0..<numberOfRows {
+        for row in 1...numberOfRows {
+            // Create row horizontal stack view
             let horizontalStackView = UIStackView()
             verticalStackView.addArrangedSubview(horizontalStackView)
             
+            // Set stack positioning properties
             horizontalStackView.axis = .horizontal
             horizontalStackView.alignment = .fill
             horizontalStackView.distribution = .fillEqually
-            horizontalStackView.spacing = 16
+            horizontalStackView.spacing = spacing
             
-            for _ in 0..<numberOfColumns {
+            // Set cards in row to be the number of columns
+            var cardsInRow = numberOfColumns
+            
+            // If it's the last row and the number of cards doesn't fill the last row
+            if row == numberOfRows && game.cardsInPlay.count < numberOfRows * numberOfColumns {
+                // Set cards in row to however many fit that row
+                cardsInRow = numberOfRows * numberOfColumns - game.cardsInPlay.count
+            }
+            
+            // Fill row with card views
+            for _ in 0..<cardsInRow {
                 let cardView = SetCardView()
                 horizontalStackView.addArrangedSubview(cardView)
             }
+            
+            
         }
         
 //        // Draw borders around cards that are selected
 //        updateBorders()
         
         // Update number of cards left in deck
-        if verticalStackView.subviews.count == 0 {
-            dealMoreCardsButton.setTitle("Deck: \(verticalStackView.subviews.count)", for: .normal)
-        } else {
-            dealMoreCardsButton.setTitle("Deck: \(verticalStackView.subviews.count * verticalStackView.subviews[0].subviews.count)", for: .normal)
-            
-            print("verticalStackView.subviews.count: \(verticalStackView.subviews.count)")
-            print("verticalStackView.arrangedSubviews.count: \(verticalStackView.arrangedSubviews.count)")
-            
-            print("verticalStackView.subviews[0].subviews.count: \(verticalStackView.subviews[0].subviews.count)")
-            print("verticalStackView.arrangedSubviews[0].subviews.count: \(verticalStackView.arrangedSubviews[0].subviews.count)")
-        }
+        dealMoreCardsButton.setTitle("Deck: \(game.cardsInPlay.count)", for: .normal)
         
 //        // Disable Deal 3 More Cards button if no more room or deck is empty
 //        if numberOfCardButtonsInPlay == cardButtons.count || game.cardsInDeck.count == 0 {
