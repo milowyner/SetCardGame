@@ -65,12 +65,15 @@ class ViewController: UIViewController {
         updateUI()
     }
     
+    //
+    // TODO: Re-implement new game button
+    //
     @IBAction func newGamePressed(_ sender: UIButton) {
         game.cardsInPlay.removeLast(3)
         updateUI()
     }
     
-    // Updates UI elements and dynamically draws cards on screen
+    // Updates UI elements and dynamically draws cards on screen.
     func updateUI() {
         // Set number of columns and rows based on the aspect ratio of the card container
         numberOfColumns = Int((Double(game.cardsInPlay.count) * aspectRatio * 0.95).squareRoot().rounded(.down))
@@ -98,13 +101,17 @@ class ViewController: UIViewController {
             horizontalStackView.distribution = .fillEqually
             horizontalStackView.spacing = spacing
             
-            // Set cards in row to be the number of columns
+            // Number of cards in the row
             var cardsInRow = numberOfColumns
+            // Number of empty spaces in row; used when number of cards doesn't fill row
+            var emptySpacesInRow = 0
             
-            // If it's the last row and the number of cards doesn't fill the last row
+            // If it's the last row and the cards don't fill the last row
             if row == numberOfRows && game.cardsInPlay.count < numberOfRows * numberOfColumns {
-                // Set cards in row to however many fit that row
-                cardsInRow = numberOfRows * numberOfColumns - game.cardsInPlay.count
+                // Set number of empty spaces to the difference between possible card spaces and cards in play
+                emptySpacesInRow = numberOfRows * numberOfColumns - game.cardsInPlay.count
+                // Set number of cards in row to the remainder
+                cardsInRow = numberOfColumns - emptySpacesInRow
             }
             
             // Fill row with card views
@@ -113,6 +120,18 @@ class ViewController: UIViewController {
                 horizontalStackView.addArrangedSubview(cardView)
             }
             
+            // Fill rest of row with empty spaces (if there are any)
+            for _ in 0..<emptySpacesInRow {
+                let emptyView = UIView()
+                horizontalStackView.addArrangedSubview(emptyView)
+            }
+            
+//            if row == numberOfRows && game.cardsInPlay.count < numberOfRows * numberOfColumns {
+//                for _ in cardsInRow..<numberOfColumns {
+//                    let emptyView = UIView()
+//                    horizontalStackView.addArrangedSubview(emptyView)
+//                }
+//            }
             
         }
         
