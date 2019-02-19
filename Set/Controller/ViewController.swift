@@ -121,9 +121,11 @@ class ViewController: UIViewController {
             // Fill row with card views
             for columnIndex in 0..<cardsInRow {
                 let cardIndex = rowIndex * numberOfColumns + columnIndex
+                let card = game.cardsInPlay[cardIndex]!
                 let cardView = SetCardView()
                 
-                cardView.shape = SetCardView.Shape(rawValue: game.cardsInPlay[cardIndex]!.shape)
+                cardView.shape = SetCardView.Shape(rawValue: card.shape)
+                cardView.color = colors[card.color]
                 horizontalStackView.addArrangedSubview(cardView)
             }
             

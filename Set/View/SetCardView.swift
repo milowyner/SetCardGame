@@ -57,17 +57,30 @@ class SetCardView: UIView { // Maybe subclass from UIButton instead of UIView
         UIColor.white.setFill()
         cardRect.fill()
         
-        // Set color
-        let color = #colorLiteral(red: 0.9108959436, green: 0.2550508642, blue: 0.2757832707, alpha: 1)
-        if shape == Shape.oval {
-            // Draw shape
-            let ovalHeight = bounds.height * 0.75
-            let ovalWidth = ovalHeight / 2
-            let ovalRect = CGRect(x: bounds.maxX / 2 - ovalWidth / 2, y: bounds.maxY / 2 - ovalHeight / 2, width: ovalWidth, height: ovalHeight)
-            let path = UIBezierPath(roundedRect: ovalRect, cornerRadius: ovalWidth / 2)
-            
-            color.setFill()
+        // Set fill color
+        color.setFill()
+        
+        // Set generic shape rect
+        let shapeHeight = bounds.height * 0.75
+        let shapeWidth = shapeHeight / 2
+        let shapeOrigin = CGPoint(x: bounds.midX - shapeWidth / 2, y: bounds.midY - shapeHeight / 2)
+        let shapeRect = CGRect(origin: shapeOrigin, size: CGSize(width: shapeWidth, height: shapeHeight))
+        
+        // Draw shape
+        switch shape! {
+        case .oval:
+            let path = UIBezierPath(roundedRect: shapeRect, cornerRadius: shapeWidth / 2)
             path.fill()
+        case .diamond:
+            let path = UIBezierPath()
+            path.move(to: CGPoint(x: shapeRect.midX, y: shapeRect.minY))
+            path.addLine(to: CGPoint(x: shapeRect.maxX, y: shapeRect.midY))
+            path.addLine(to: CGPoint(x: shapeRect.midX, y: shapeRect.maxY))
+            path.addLine(to: CGPoint(x: shapeRect.minX, y: shapeRect.midY))
+            path.close()
+            path.fill()
+        case .squiggle:
+            break
         }
     }
 
