@@ -135,7 +135,7 @@ class ViewController: UIViewController {
 //        updateBorders()
         
         // Update number of cards left in deck
-        dealMoreCardsButton.setTitle("Deck: \(game.cardsInPlay.count)", for: .normal)
+        dealMoreCardsButton.setTitle("Deck: \(game.cardsInDeck.count)", for: .normal)
         
 //        // Disable Deal 3 More Cards button if deck is empty
         if game.cardsInDeck.count == 0 {
