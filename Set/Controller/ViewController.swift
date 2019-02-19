@@ -137,12 +137,12 @@ class ViewController: UIViewController {
         // Update number of cards left in deck
         dealMoreCardsButton.setTitle("Deck: \(game.cardsInPlay.count)", for: .normal)
         
-//        // Disable Deal 3 More Cards button if no more room or deck is empty
-//        if numberOfCardButtonsInPlay == cardButtons.count || game.cardsInDeck.count == 0 {
-//            dealMoreCardsButton.isEnabled = false
-//        } else {
-//            dealMoreCardsButton.isEnabled = true
-//        }
+//        // Disable Deal 3 More Cards button if deck is empty
+        if game.cardsInDeck.count == 0 {
+            dealMoreCardsButton.isEnabled = false
+        } else {
+            dealMoreCardsButton.isEnabled = true
+        }
         
         // Update score
 //        scoreLabel.text = "Score: \(game.score)"
