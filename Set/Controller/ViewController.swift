@@ -94,7 +94,7 @@ class ViewController: UIViewController {
         }
         
         // Add card views based on number of cards in play
-        for row in 1...numberOfRows {
+        for rowIndex in 0..<numberOfRows {
             // Create row horizontal stack view
             let horizontalStackView = UIStackView()
             verticalStackView.addArrangedSubview(horizontalStackView)
@@ -111,7 +111,7 @@ class ViewController: UIViewController {
             var emptySpacesInRow = 0
             
             // If it's the last row and the cards don't fill the last row
-            if row == numberOfRows && game.cardsInPlay.count < numberOfRows * numberOfColumns {
+            if rowIndex == numberOfRows - 1 && game.cardsInPlay.count < numberOfRows * numberOfColumns {
                 // Set number of empty spaces to the difference between possible card spaces and cards in play
                 emptySpacesInRow = numberOfRows * numberOfColumns - game.cardsInPlay.count
                 // Set number of cards in row to the remainder
@@ -119,8 +119,11 @@ class ViewController: UIViewController {
             }
             
             // Fill row with card views
-            for _ in 0..<cardsInRow {
+            for columnIndex in 0..<cardsInRow {
+                let cardIndex = rowIndex * numberOfColumns + columnIndex
                 let cardView = SetCardView()
+                
+                cardView.shape = SetCardView.Shape(rawValue: game.cardsInPlay[cardIndex]!.shape)
                 horizontalStackView.addArrangedSubview(cardView)
             }
             

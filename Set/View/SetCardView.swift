@@ -11,13 +11,13 @@ import UIKit
 @IBDesignable
 class SetCardView: UIView { // Maybe subclass from UIButton instead of UIView
     
-    enum Shape {
+    enum Shape: Int {
         case oval
         case squiggle
         case diamond
     }
     
-    enum Shading {
+    enum Shading: Int {
         case solid
         case striped
         case outlined
@@ -56,6 +56,19 @@ class SetCardView: UIView { // Maybe subclass from UIButton instead of UIView
         let cardRect = UIBezierPath(roundedRect: bounds, cornerRadius: radius)
         UIColor.white.setFill()
         cardRect.fill()
+        
+        // Set color
+        let color = #colorLiteral(red: 0.9108959436, green: 0.2550508642, blue: 0.2757832707, alpha: 1)
+        if shape == Shape.oval {
+            // Draw shape
+            let ovalHeight = bounds.height * 0.75
+            let ovalWidth = ovalHeight / 2
+            let ovalRect = CGRect(x: bounds.maxX / 2 - ovalWidth / 2, y: bounds.maxY / 2 - ovalHeight / 2, width: ovalWidth, height: ovalHeight)
+            let path = UIBezierPath(roundedRect: ovalRect, cornerRadius: ovalWidth / 2)
+            
+            color.setFill()
+            path.fill()
+        }
     }
 
 }
