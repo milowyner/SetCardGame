@@ -42,12 +42,9 @@ class ViewController: UIViewController {
         setVisuals(of: newGameButton)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        updateUI()
-    }
-    
     override func viewDidLayoutSubviews() {
         aspectRatio = Double(verticalStackView.frame.width) / Double(verticalStackView.frame.height)
+        updateUI()
     }
     
 //    @IBAction func cardPressed(_ sender: UIButton) {
@@ -75,6 +72,13 @@ class ViewController: UIViewController {
     
     // Updates UI elements and dynamically draws cards on screen.
     func updateUI() {
+        
+        // TODO: Make cards layout vertically or horizontally.
+        // In order to do this, caluclate the number of rows/columns for vertically laid out cards
+        // along with the horizontal ones, then calculate the aspect ratio of each card possibility.
+        // Then see which aspect ratio is closer to their ideal aspect ratio (3:4 for vertical, 4:3 for horizontal)
+        // and use those rows/columns to draw cards.
+
         // Set number of columns and rows based on the aspect ratio of the card container
         numberOfColumns = Int((Double(game.cardsInPlay.count) * aspectRatio * 0.95).squareRoot().rounded(.down))
         numberOfRows = Int((Double(game.cardsInPlay.count) / Double(numberOfColumns)).rounded(.up))
@@ -125,14 +129,6 @@ class ViewController: UIViewController {
                 let emptyView = UIView()
                 horizontalStackView.addArrangedSubview(emptyView)
             }
-            
-//            if row == numberOfRows && game.cardsInPlay.count < numberOfRows * numberOfColumns {
-//                for _ in cardsInRow..<numberOfColumns {
-//                    let emptyView = UIView()
-//                    horizontalStackView.addArrangedSubview(emptyView)
-//                }
-//            }
-            
         }
         
 //        // Draw borders around cards that are selected
