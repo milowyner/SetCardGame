@@ -59,6 +59,8 @@ class SetCardView: UIView { // Maybe subclass from UIButton instead of UIView
         
         // Set fill color
         color.setFill()
+        color.setStroke()
+        
         
         // Set generic shape rect
         let shapeHeight = bounds.height * 0.75
@@ -66,22 +68,38 @@ class SetCardView: UIView { // Maybe subclass from UIButton instead of UIView
         let shapeOrigin = CGPoint(x: bounds.midX - shapeWidth / 2, y: bounds.midY - shapeHeight / 2)
         let shapeRect = CGRect(origin: shapeOrigin, size: CGSize(width: shapeWidth, height: shapeHeight))
         
+        var path = UIBezierPath()
+        
         // Draw shape
         switch shape! {
         case .oval:
-            let path = UIBezierPath(roundedRect: shapeRect, cornerRadius: shapeWidth / 2)
-            path.fill()
+            path = UIBezierPath(roundedRect: shapeRect, cornerRadius: shapeWidth / 2)
         case .diamond:
-            let path = UIBezierPath()
+            path = UIBezierPath()
             path.move(to: CGPoint(x: shapeRect.midX, y: shapeRect.minY))
             path.addLine(to: CGPoint(x: shapeRect.maxX, y: shapeRect.midY))
             path.addLine(to: CGPoint(x: shapeRect.midX, y: shapeRect.maxY))
             path.addLine(to: CGPoint(x: shapeRect.minX, y: shapeRect.midY))
             path.close()
-            path.fill()
         case .squiggle:
+//            let path = UIBezierPath()
+//            path.move(to: CGPoint(x: shapeRect.midX, y: shapeRect.minY))
+//            path.addCurve(to: CGPoint(x: shapeRect.midX, y: shapeRect.maxY), controlPoint1: CGPoint(x: shapeRect.maxX, y: shapeRect.midY / 2), controlPoint2: CGPoint(x: shapeRect.minX, y: shapeRect.maxY - shapeRect.midY / 2))
+//            path.stroke()
             break
         }
+        
+        switch shading! {
+        case .solid:
+            path.fill()
+        case .outlined:
+            print("outlined")
+            path.lineWidth = shapeRect.height * 0.05
+            path.stroke()
+        case .striped:
+            break
+        }
+        
     }
 
 }
