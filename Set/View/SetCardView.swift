@@ -93,11 +93,31 @@ class SetCardView: UIView { // Maybe subclass from UIButton instead of UIView
         case .solid:
             path.fill()
         case .outlined:
-            print("outlined")
             path.lineWidth = shapeRect.height * 0.05
             path.stroke()
         case .striped:
-            break
+            if shape != .squiggle {
+                path.lineWidth = shapeRect.height * 0.05
+                path.stroke()
+                path.addClip()
+                
+                let numberOfStripes = 12
+                let stripe = UIBezierPath()
+                stripe.lineWidth = shapeRect.height * 0.03
+                var firstPoint = CGPoint(x: shapeRect.minX, y: shapeRect.minY)
+                var secondPoint = CGPoint(x: shapeRect.maxX, y: firstPoint.y)
+                stripe.move(to: firstPoint)
+                stripe.addLine(to: secondPoint)
+                for _ in 0..<numberOfStripes {
+                    firstPoint = CGPoint(x: firstPoint.x, y: firstPoint.y + shapeHeight / CGFloat(numberOfStripes))
+                    secondPoint = CGPoint(x: shapeRect.maxX, y: firstPoint.y)
+                    
+                    stripe.move(to: firstPoint)
+                    stripe.addLine(to: secondPoint)
+                }
+                
+                stripe.stroke()
+            }
         }
         
     }
