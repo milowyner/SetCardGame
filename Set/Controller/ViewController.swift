@@ -127,6 +127,7 @@ class ViewController: UIViewController {
                 cardView.shape = SetCardView.Shape(rawValue: card.shape)
                 cardView.color = colors[card.color]
                 cardView.shading = SetCardView.Shading(rawValue: card.shading)
+                cardView.number = card.number
                 
                 horizontalStackView.addArrangedSubview(cardView)
             }

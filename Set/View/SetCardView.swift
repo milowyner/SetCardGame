@@ -27,7 +27,7 @@ class SetCardView: UIView { // Maybe subclass from UIButton instead of UIView
     var color: UIColor!
     var shading: Shading!
     var number: Int!
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -69,33 +69,59 @@ class SetCardView: UIView { // Maybe subclass from UIButton instead of UIView
             shapeWidth = shapeHeight / 2
         }
         
-        let shapeOrigin = CGPoint(x: bounds.midX - shapeWidth / 2, y: bounds.midY - shapeHeight / 2)
-        let shapeRect = CGRect(origin: shapeOrigin, size: CGSize(width: shapeWidth, height: shapeHeight))
+        var shapeOrigin = CGPoint(x: bounds.midX - shapeWidth / 2, y: bounds.midY - shapeHeight / 2)
+        var shapeRect: CGRect {
+            return CGRect(origin: shapeOrigin, size: CGSize(width: shapeWidth, height: shapeHeight))
+        }
+        var offset = shapeRect.width * 1.3
         
+        switch number! {
+        case 0:
+            drawShape(using: shapeRect)
+        case 1:
+            offset = (shapeOrigin.x - (shapeOrigin.x - offset)) / 2
+            shapeOrigin = CGPoint(x: shapeOrigin.x - offset, y: shapeOrigin.y)
+            drawShape(using: shapeRect)
+            
+            shapeOrigin = CGPoint(x: shapeOrigin.x + 2 * offset, y: shapeOrigin.y)
+            drawShape(using: shapeRect)
+        case 2:
+            drawShape(using: shapeRect)
+            
+            shapeOrigin = CGPoint(x: shapeOrigin.x - offset, y: shapeOrigin.y)
+            drawShape(using: shapeRect)
+            
+            shapeOrigin = CGPoint(x: shapeOrigin.x + 2 * offset, y: shapeOrigin.y)
+            drawShape(using: shapeRect)
+        default:
+            fatalError("Should only be 3 possible card numbers")
+        }
+    }
+    
+    private func drawShape(using rect: CGRect) {
         var path = UIBezierPath()
-        
         // Draw shape
         switch shape! {
         case .oval:
-            path = UIBezierPath(roundedRect: shapeRect, cornerRadius: shapeWidth / 2)
+            path = UIBezierPath(roundedRect: rect, cornerRadius: rect.width / 2)
         case .diamond:
             path = UIBezierPath()
-            path.move(to: CGPoint(x: shapeRect.midX, y: shapeRect.minY))
-            path.addLine(to: CGPoint(x: shapeRect.maxX, y: shapeRect.midY))
-            path.addLine(to: CGPoint(x: shapeRect.midX, y: shapeRect.maxY))
-            path.addLine(to: CGPoint(x: shapeRect.minX, y: shapeRect.midY))
+            path.move(to: CGPoint(x: rect.midX, y: rect.minY))
+            path.addLine(to: CGPoint(x: rect.maxX, y: rect.midY))
+            path.addLine(to: CGPoint(x: rect.midX, y: rect.maxY))
+            path.addLine(to: CGPoint(x: rect.minX, y: rect.midY))
             path.close()
         case .squiggle:
             path = UIBezierPath()
             
-            let squiggleWidth = shapeWidth * 0.75
-            let squiggleHeight = shapeHeight * 0.55
-            let widthSegment = shapeWidth / 4
-            let heightSegment = shapeHeight / 4
+            let squiggleWidth = rect.width * 0.75
+            let squiggleHeight = rect.height * 0.55
+            let widthSegment = rect.width / 4
+            let heightSegment = rect.height / 4
             
             // Base points
-            let topLeft = CGPoint(x: shapeRect.midX - squiggleWidth / 2, y: shapeRect.midY - squiggleHeight / 2)
-            let bottomLeft = CGPoint(x: shapeRect.midX - squiggleWidth / 2, y: shapeRect.midY + squiggleHeight / 2)
+            let topLeft = CGPoint(x: rect.midX - squiggleWidth / 2, y: rect.midY - squiggleHeight / 2)
+            let bottomLeft = CGPoint(x: rect.midX - squiggleWidth / 2, y: rect.midY + squiggleHeight / 2)
             let topRight = CGPoint(x: topLeft.x + squiggleWidth, y: topLeft.y)
             let bottomRight = CGPoint(x: bottomLeft.x + squiggleWidth, y: bottomLeft.y)
             
@@ -109,8 +135,8 @@ class SetCardView: UIView { // Maybe subclass from UIButton instead of UIView
             let topBezierPoint1 = CGPoint(x: topLeft.x - (leftBezierPoint1.x - topLeft.x), y: topLeft.y - (leftBezierPoint1.y - topLeft.y))
             let topBezierPoint2 = CGPoint(x: topRight.x - (rightBezierPoint1.x - topRight.x), y: topRight.y - (rightBezierPoint1.y - topRight.y) * 1.2)
             
-            let bottomBezierPoint1 = CGPoint(x: shapeRect.midX + (shapeRect.midX - topBezierPoint1.x), y: shapeRect.midY + (shapeRect.midY - topBezierPoint1.y))
-            let bottomBezierPoint2 = CGPoint(x: shapeRect.midX + (shapeRect.midX - topBezierPoint2.x), y: shapeRect.midY + (shapeRect.midY - topBezierPoint2.y))
+            let bottomBezierPoint1 = CGPoint(x: rect.midX + (rect.midX - topBezierPoint1.x), y: rect.midY + (rect.midY - topBezierPoint1.y))
+            let bottomBezierPoint2 = CGPoint(x: rect.midX + (rect.midX - topBezierPoint2.x), y: rect.midY + (rect.midY - topBezierPoint2.y))
             
             // Left side
             path.move(to: bottomLeft)
@@ -121,31 +147,35 @@ class SetCardView: UIView { // Maybe subclass from UIButton instead of UIView
             
             // Right side
             path.addCurve(to: bottomRight, controlPoint1: rightBezierPoint1, controlPoint2: rightBezierPoint2)
-
+            
             // Bottom
             path.addCurve(to: bottomLeft, controlPoint1: bottomBezierPoint1, controlPoint2: bottomBezierPoint2)
         }
         
+        let context = UIGraphicsGetCurrentContext()
+        context?.addPath(path.cgPath)
+        context?.saveGState()
         path.addClip()
         
+        // Add shading
         switch shading! {
         case .solid:
             path.fill()
         case .outlined, .striped:
-            path.lineWidth = shapeRect.height * 0.1
+            path.lineWidth = rect.height * 0.1
             path.stroke()
             
             if shading == .striped {
-                let numberOfStripes = 14
+                let numberOfStripes = 12
                 let stripe = UIBezierPath()
-                stripe.lineWidth = shapeRect.height * 0.03
-                var firstPoint = CGPoint(x: shapeRect.minX, y: shapeRect.minY)
-                var secondPoint = CGPoint(x: shapeRect.maxX, y: firstPoint.y)
+                stripe.lineWidth = rect.height * 0.03
+                var firstPoint = CGPoint(x: rect.minX, y: rect.minY)
+                var secondPoint = CGPoint(x: rect.maxX, y: firstPoint.y)
                 stripe.move(to: firstPoint)
                 stripe.addLine(to: secondPoint)
                 for _ in 0..<numberOfStripes {
-                    firstPoint = CGPoint(x: firstPoint.x, y: firstPoint.y + shapeHeight / CGFloat(numberOfStripes))
-                    secondPoint = CGPoint(x: shapeRect.maxX, y: firstPoint.y)
+                    firstPoint = CGPoint(x: firstPoint.x, y: firstPoint.y + rect.height / CGFloat(numberOfStripes))
+                    secondPoint = CGPoint(x: rect.maxX, y: firstPoint.y)
                     
                     stripe.move(to: firstPoint)
                     stripe.addLine(to: secondPoint)
@@ -154,6 +184,7 @@ class SetCardView: UIView { // Maybe subclass from UIButton instead of UIView
                 stripe.stroke()
             }
         }
+        context?.restoreGState()
     }
 
 }
