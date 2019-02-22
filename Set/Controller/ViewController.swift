@@ -14,10 +14,12 @@ class ViewController: UIViewController {
     var cardViews = [CardView]()
 
     @IBOutlet weak var dealMoreCardsButton: UIButton!
+    @IBOutlet weak var deckCountLabel: UILabel!
     @IBOutlet weak var newGameButton: UIButton!
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var verticalStackView: UIStackView!
     
+
     // Set game
     var game = SetGame()
     
@@ -153,7 +155,7 @@ class ViewController: UIViewController {
         updateBorders()
         
         // Update number of cards left in deck
-        dealMoreCardsButton.setTitle("Deck: \(game.cardsInDeck.count)", for: .normal)
+        deckCountLabel.text = "Deck: \(game.cardsInDeck.count)"
         
         // Disable Deal 3 More Cards button if deck is empty
         if game.cardsInDeck.count == 0 {
