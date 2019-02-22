@@ -69,7 +69,7 @@ class ViewController: UIViewController {
     // TODO: Re-implement new game button
     //
     @IBAction func newGamePressed(_ sender: UIButton) {
-        game.cardsInPlay.removeLast(3)
+        game = SetGame()
         updateUI()
     }
     

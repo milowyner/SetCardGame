@@ -12,7 +12,7 @@ struct SetGame {
     // List of all card in the deck
     private(set) var cardsInDeck = [Card]()
     // List of cards in play
-    var cardsInPlay = [Card?]()
+    private (set) var cardsInPlay = [Card?]()
     // List of selected cards
     private(set) var selectedCards = [Card]()
     // Bool detecting whether or not the selected cards form a set
@@ -108,10 +108,12 @@ struct SetGame {
             replaceMatchedSet()
         }
         
+        // Decrease score factor if greater than 25
         if scoreFactor > 25 {
             scoreFactor -= 25
         }
         
+        // Add three more cards into play
         if cardsInDeck.count != 0 {
             cardsInPlay.append(contentsOf: Array(cardsInDeck[0..<3]))
             cardsInDeck.removeSubrange(0..<3)
