@@ -1,5 +1,5 @@
 //
-//  SetCardView.swift
+//  CardView.swift
 //  Set
 //
 //  Created by Milo Wyner on 2/11/19.
@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-class SetCardView: UIView { // Maybe subclass from UIButton instead of UIView
+class CardView: UIView {
     
     enum Shape: Int {
         case oval
@@ -51,11 +51,14 @@ class SetCardView: UIView { // Maybe subclass from UIButton instead of UIView
     override func draw(_ rect: CGRect) {
         // Set radius based on width or height depending on which is smaller
         let radius = bounds.width < bounds.height ? bounds.width * 0.11 : bounds.height * 0.11
+        self.layer.cornerRadius = radius
+        self.layer.borderWidth = bounds.height * 0.06
         
         // Create and fill bounds rectangle
         let cardRect = UIBezierPath(roundedRect: bounds, cornerRadius: radius)
         UIColor.white.setFill()
         cardRect.fill()
+        
         
         // Set fill color
         color.setFill()
@@ -64,8 +67,8 @@ class SetCardView: UIView { // Maybe subclass from UIButton instead of UIView
         // Set generic shape rect
         var shapeWidth = bounds.width * 0.2
         var shapeHeight = shapeWidth * 2
-        if shapeHeight > bounds.height * 0.75 {
-            shapeHeight = bounds.height * 0.75
+        if shapeHeight > bounds.height * 0.65 {
+            shapeHeight = bounds.height * 0.65
             shapeWidth = shapeHeight / 2
         }
         

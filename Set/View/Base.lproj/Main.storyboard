@@ -46,7 +46,7 @@
                                     <action selector="dealThreeMoreCardsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="g1N-2j-MG4"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Vo-Oh-QJE">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Vo-Oh-QJE">
                                 <rect key="frame" x="276" y="786" width="122" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="Quf-8E-SLc"/>

@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController {
 
     // List of card buttons in UI
-    @IBOutlet var cardButtons: [UIButton]!
+    var cardViews = [CardView]()
 
     @IBOutlet weak var dealMoreCardsButton: UIButton!
     @IBOutlet weak var newGameButton: UIButton!
@@ -47,15 +47,18 @@ class ViewController: UIViewController {
         updateUI()
     }
     
-//    @IBAction func cardPressed(_ sender: UIButton) {
-//        let indexOfChosenCard = cardButtons.firstIndex(of: sender)!
-//        guard let chosenCard = game.cardsInPlay[indexOfChosenCard] else {
-//            fatalError("Chosen card is nil")
-//        }
-//        game.chooseCard(chosenCard)
-//
-//        updateUI()
-//    }
+    @objc func cardPressed(sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            let cardView = sender.view as! CardView
+            let indexOfChosenCard = cardViews.firstIndex(of: cardView)!
+            guard let chosenCard = game.cardsInPlay[indexOfChosenCard] else {
+                fatalError("Chosen card is nil")
+            }
+            game.chooseCard(chosenCard)
+
+            updateUI()
+        }
+    }
     
     @IBAction func dealThreeMoreCardsPressed(_ sender: UIButton) {
         game.dealThreeMoreCards()
@@ -81,17 +84,20 @@ class ViewController: UIViewController {
 
         // Set number of columns and rows based on the aspect ratio of the card container
         numberOfColumns = Int((Double(game.cardsInPlay.count) * aspectRatio * 0.95).squareRoot().rounded(.down))
-        numberOfRows = Int((Double(game.cardsInPlay.count) / Double(numberOfColumns)).rounded(.up))
+        numberOfRows = numberOfColumns == 0 ? 0 : Int((Double(game.cardsInPlay.count) / Double(numberOfColumns)).rounded(.up))
         
         // Set spacing between cells based on card cell height
         let cellHeight = Double(verticalStackView.bounds.height) / Double(numberOfRows)
         let spacing = CGFloat(cellHeight * 0.14)
         verticalStackView.spacing = spacing
         
-        // Remove all card views
+        // Remove all card views from superview
         for subview in verticalStackView.arrangedSubviews {
             subview.removeFromSuperview()
         }
+        
+        // Remove all card views from array
+        cardViews = []
         
         // Add card views based on number of cards in play
         for rowIndex in 0..<numberOfRows {
@@ -122,13 +128,17 @@ class ViewController: UIViewController {
             for columnIndex in 0..<cardsInRow {
                 let cardIndex = rowIndex * numberOfColumns + columnIndex
                 let card = game.cardsInPlay[cardIndex]!
-                let cardView = SetCardView()
+                let cardView = CardView()
                 
-                cardView.shape = SetCardView.Shape(rawValue: card.shape)
+                cardView.shape = CardView.Shape(rawValue: card.shape)
                 cardView.color = colors[card.color]
-                cardView.shading = SetCardView.Shading(rawValue: card.shading)
+                cardView.shading = CardView.Shading(rawValue: card.shading)
                 cardView.number = card.number
                 
+                let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(cardPressed))
+                cardView.addGestureRecognizer(tapRecognizer)
+                
+                cardViews.append(cardView)
                 horizontalStackView.addArrangedSubview(cardView)
             }
             
@@ -139,13 +149,13 @@ class ViewController: UIViewController {
             }
         }
         
-//        // Draw borders around cards that are selected
-//        updateBorders()
+        // Draw borders around cards that are selected
+        updateBorders()
         
         // Update number of cards left in deck
         dealMoreCardsButton.setTitle("Deck: \(game.cardsInDeck.count)", for: .normal)
         
-//        // Disable Deal 3 More Cards button if deck is empty
+        // Disable Deal 3 More Cards button if deck is empty
         if game.cardsInDeck.count == 0 {
             dealMoreCardsButton.isEnabled = false
         } else {
@@ -153,7 +163,7 @@ class ViewController: UIViewController {
         }
         
         // Update score
-//        scoreLabel.text = "Score: \(game.score)"
+        scoreLabel.text = "Score: \(game.score)"
     }
     
     // Disables cardButton by clearing title and background and setting isEnabled to false.
@@ -208,14 +218,13 @@ class ViewController: UIViewController {
             borderColor = #colorLiteral(red: 0, green: 0.4392156863, blue: 0.9607843137, alpha: 1)
         }
         // Clear all borders
-        for card in cardButtons {
-            card.layer.borderWidth = 0.0
+        for card in cardViews {
+            card.layer.borderColor = UIColor.clear.cgColor
         }
         // Draw borders for selected cards based on borderColor
         for selectedCard in game.selectedCards {
             let indexFromGameCards = game.cardsInPlay.firstIndex(of: selectedCard)!
-            let card = cardButtons[indexFromGameCards]
-            card.layer.borderWidth = 4.0
+            let card = cardViews[indexFromGameCards]
             card.layer.borderColor = borderColor
         }
     }

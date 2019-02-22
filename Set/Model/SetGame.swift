@@ -26,7 +26,7 @@ struct SetGame {
         }
     }
     
-    private var scoreFactor: Int = 10
+    private var scoreFactor: Int = 100
     
     init() {
         // Initialize cardsInDeck to contain cards of every possible combination of properties
@@ -107,7 +107,11 @@ struct SetGame {
         if selectedCardsAreASet ?? false {
             replaceMatchedSet()
         }
-        scoreFactor -= 2
+        
+        if scoreFactor > 25 {
+            scoreFactor -= 25
+        }
+        
         if cardsInDeck.count != 0 {
             cardsInPlay.append(contentsOf: Array(cardsInDeck[0..<3]))
             cardsInDeck.removeSubrange(0..<3)
@@ -127,15 +131,15 @@ struct SetGame {
     private mutating func replaceMatchedSet() {
         for selectedCard in selectedCards {
             let indexOfSelectedCard = cardsInPlay.firstIndex(of: selectedCard)!
+            
+            // Remove the selected card
+            cardsInPlay.remove(at: indexOfSelectedCard)
+            
             // If deck isn't empty
             if cardsInDeck.count != 0 {
-                // Remove selected card and replace with a new card from deck
-                cardsInPlay.remove(at: indexOfSelectedCard)
+                // Replace with a new card from deck
                 let replacementCard = cardsInDeck.removeFirst()
                 cardsInPlay.insert(replacementCard, at: indexOfSelectedCard)
-            } else {
-                // Set the card that was there to nil
-                cardsInPlay[indexOfSelectedCard] = nil
             }
         }
         selectedCards.removeAll()
