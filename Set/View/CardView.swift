@@ -164,28 +164,31 @@ class CardView: UIView {
         switch shading! {
         case .solid:
             path.fill()
-        case .outlined, .striped:
-            path.lineWidth = rect.height * 0.1
+        case .outlined:
+            path.lineWidth = rect.height * 0.13
             path.stroke()
+        case .striped:
+            let numberOfStripes = 9
+            let stripe = UIBezierPath()
             
-            if shading == .striped {
-                let numberOfStripes = 12
-                let stripe = UIBezierPath()
-                stripe.lineWidth = rect.height * 0.03
-                var firstPoint = CGPoint(x: rect.minX, y: rect.minY)
-                var secondPoint = CGPoint(x: rect.maxX, y: firstPoint.y)
+            stripe.lineWidth = rect.height * 0.09 / 2
+            
+            var firstPoint = CGPoint(x: rect.minX, y: rect.minY + (rect.height / CGFloat(numberOfStripes)) * 1.18)
+            var secondPoint = CGPoint(x: rect.maxX, y: firstPoint.y)
+            
+            stripe.move(to: firstPoint)
+            stripe.addLine(to: secondPoint)
+            for _ in 0..<numberOfStripes - 2 {
+                firstPoint = CGPoint(x: firstPoint.x, y: firstPoint.y + rect.height / (CGFloat(numberOfStripes) + 0.5))
+                secondPoint = CGPoint(x: rect.maxX, y: firstPoint.y)
+                
                 stripe.move(to: firstPoint)
                 stripe.addLine(to: secondPoint)
-                for _ in 0..<numberOfStripes {
-                    firstPoint = CGPoint(x: firstPoint.x, y: firstPoint.y + rect.height / CGFloat(numberOfStripes))
-                    secondPoint = CGPoint(x: rect.maxX, y: firstPoint.y)
-                    
-                    stripe.move(to: firstPoint)
-                    stripe.addLine(to: secondPoint)
-                }
-                
-                stripe.stroke()
             }
+            
+            path.lineWidth = rect.height * 0.1
+            path.stroke()
+            stripe.stroke()
         }
         context?.restoreGState()
     }
